@@ -58,7 +58,7 @@
     "test": "yarn test:mocha",
     "test:fix": "yarn test:mocha",
     "test:mocha": "mocha --reporter spec --require ts-node/register 'src/**/*.spec.ts'",
-    "build": "rm -rf ./dist && cp -R '../../dist/client/src/' ./dist/ && chmod +x dist/runner.js",
+    "build": "rm -rf ./dist && cp -R '../../dist/client/' ./dist/ && chmod +x ./dist/runner.js",
     "prepublish": "cd ../../ && yarn build"
   },
   "files": [

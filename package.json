@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "prepare": "patch-package",
-    "build": "tsc && (cd packages/client/ && yarn build)",
+    "build": "rm -rf ./dist && tsc && (cd packages/client/ && yarn build)",
     "tsc": "tsc -p . --noEmit",
     "tslint": "tslint -p ./tsconfig.json -e 'node_modules/**/*' -e '**/node_modules/**/*' 'packages/**/*.ts'",
     "tslint:fix": "tslint --fix --format stylish -p ./tsconfig.json -e 'node_modules/**/*' -e '**/node_modules/**/*' 'packages/**/*.ts'",
