@@ -1,0 +1,10 @@
+---
+checks:
+- name: build-size-watcher
+  options:
+    gzip: false
+    files:
+    - path: "./build/static/js/*.js"
+      maxSize: 1MB
+    - path: "./build/static/css/*.css"
+    - path: "./build/static/images/*.jpg"
