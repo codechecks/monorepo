@@ -12,6 +12,14 @@
   </p>
 </p>
 
+## Packages 📦
+
+| Package                                  | Version                                                                                                         | Description                                                |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| [`@codechecks/client`](/packages/client) | [![npm](https://img.shields.io/npm/v/@codechecks/client.svg)](https://www.npmjs.com/package/@codechecks/client) | TypeScript/JavaScript client used for executing codechecks |
+
+Note: Currently we are in the process of open sourcing whole platform.
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -22,4 +30,5 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome! [Read more](./CONTRIBUTING.md)!
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification.
+Contributions of any kind welcome! [Read more](./CONTRIBUTING.md)!
