@@ -18,7 +18,7 @@
 npm add --save-dev @codechecks/client
 ```
 
-## Docs
+## Docs 📚
 
 - [Full documentation](https://github.com/codechecks/docs)
 - [Getting start guide](https://github.com/codechecks/docs/blob/master/getting-started.md)

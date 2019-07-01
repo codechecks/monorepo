@@ -12,6 +12,11 @@
   </p>
 </p>
 
+## Docs 📚
+
+- [Full documentation](https://github.com/codechecks/docs)
+- [Getting start guide](https://github.com/codechecks/docs/blob/master/getting-started.md)
+
 ## Packages 📦
 
 | Package                                  | Version                                                                                                         | Description                                                |
