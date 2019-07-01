@@ -22,6 +22,16 @@
         "business",
         "infra"
       ]
+    },
+    {
+      "login": "cgewecke",
+      "name": "cgewecke",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7332026?v=4",
+      "profile": "https://cgewecke.github.io/",
+      "contributions": [
+        "plugin",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7
