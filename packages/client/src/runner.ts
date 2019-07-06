@@ -11,13 +11,13 @@ import { normalizePath, Path, maskSecrets } from "./utils";
 import { executeCodechecksFile, findCodechecksFiles } from "./file-handling/execution";
 import { codechecks as globalClient } from ".";
 import { checkIfIsLocalMode } from "./ci-providers/Local";
-import { logger, printLogo } from "./logger";
+import { logger, printLogo, bold, formatSHA, formatPath } from "./logger";
 import { loadCodechecksSettings } from "./file-handling/settings";
 import { findRootGitRepository } from "./utils/git";
 
 async function main(project?: string, codecheckFiles: Path[] = findCodechecksFiles(process.cwd())): Promise<void> {
   printLogo();
-  logger.log(`Executing ${codecheckFiles.length} codechecks files`);
+  logger.log(`Executing ${bold(codecheckFiles.length)} codechecks files`);
   const startTime = new Date().getTime();
 
   const provider = findProvider(process.env, project);
@@ -40,9 +40,13 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
   if (sharedExecutionCtx.isLocalMode) {
     logger.log("Running in local mode!");
   }
+  if (sharedExecutionCtx.isPr) {
+    logger.log(`Base branch: ${bold(formatSHA(sharedExecutionCtx.pr!.base.sha))}`);
+  }
+  console.log();
 
   for (const codecheckFile of codecheckFiles) {
-    logger.log(`Executing ${codecheckFile}...`);
+    logger.log(`Executing ${bold(formatPath(codecheckFile, gitRoot))}...`);
     // do not use this instance after clone
     const _client = new CodechecksClient(api, getExecutionContext(sharedExecutionCtx, codecheckFile));
     replaceObject(globalClient, _client);
@@ -53,7 +57,7 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
   const finishTime = new Date().getTime();
   const deltaTime = finishTime - startTime;
 
-  logger.log(`All done in ${ms(deltaTime)}!`);
+  logger.log(`All done in ${bold(ms(deltaTime))}!`);
 }
 
 const command = program
@@ -64,7 +68,8 @@ const command = program
 
 main(command.project, command.args.length > 0 ? command.args.map(a => normalizePath(a)) : undefined).catch(e => {
   // we want informative output but we don't want leaking secrets into any logs
-  logger.error(maskSecrets(inspect(e), process.env));
+  logger.error(maskSecrets(e.message, process.env));
+  logger.debug(maskSecrets(inspect(e), process.env));
   process.exit(1);
 });
 

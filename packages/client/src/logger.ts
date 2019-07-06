@@ -1,6 +1,7 @@
 // types for debug library suck so we dont use them
 const debug = require("debug")("codechecks:client");
 import chalk from "chalk";
+import { relative } from "path";
 
 export function printLogo(): void {
   console.log(
@@ -9,6 +10,18 @@ export function printLogo(): void {
     )}`,
   );
   console.log();
+}
+
+export function bold(input: string | number): string {
+  return chalk.bold(input.toString());
+}
+
+export function formatSHA(sha: string): string {
+  return sha.slice(0, 8);
+}
+
+export function formatPath(path: string, rootPath: string): string {
+  return relative(rootPath, path);
 }
 
 class Logger {
@@ -21,7 +34,7 @@ class Logger {
   }
 
   error(...args: any[]): void {
-    console.error(...args);
+    console.error(chalk.red("Error occured: "), ...args);
   }
 }
 
