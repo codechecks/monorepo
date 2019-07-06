@@ -25,7 +25,9 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
     (provider as any).setApi(api);
   }
 
-  const sharedExecutionCtx = await getConstExecutionContext(api, provider);
+  // @todo tmp. just to silent tsc
+  const settings: any = {};
+  const sharedExecutionCtx = await getConstExecutionContext(api, provider, settings, process.cwd());
 
   if (sharedExecutionCtx.isFork) {
     logger.log("Running for fork!");

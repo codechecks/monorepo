@@ -370,11 +370,13 @@ export interface PrInfo {
   base: {
     sha: string;
   };
-  files: {
-    changed: string[];
-    added: string[];
-    removed: string[];
-  };
+  files: FileStatuses;
+}
+
+export interface FileStatuses {
+  changed: string[];
+  added: string[];
+  removed: string[];
 }
 
 export interface ProjectInfo {

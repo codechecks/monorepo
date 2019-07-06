@@ -4,11 +4,18 @@ import { DeepReadonly } from "ts-essentials";
 import { Path } from "./utils";
 import { dirname } from "path";
 import { LocalProvider } from "./ci-providers/Local";
+import { CodeChecksSettings } from "./types";
+import { getPrInfoForSpeculativeBranch } from "./speculativeBranchSelection";
 
 /**
  * Better part of execution context stays the same for all codechecks files being executed so we just get it once.
  */
-export async function getConstExecutionContext(api: Api, ciProvider: CiProvider): Promise<ConstantExecutionContext> {
+export async function getConstExecutionContext(
+  api: Api,
+  ciProvider: CiProvider,
+  settings: CodeChecksSettings,
+  gitRepoRootPath: string,
+): Promise<ConstantExecutionContext> {
   const currentSha = await ciProvider.getCurrentSha();
   const isFork = await ciProvider.isFork();
   const pr = await ciProvider.getPullRequestID();
@@ -34,8 +41,8 @@ export async function getConstExecutionContext(api: Api, ciProvider: CiProvider)
     }
   } else {
     projectInfo = await api.projectInfo();
-    if (pr !== undefined) {
-      prInfo = await api.prInfo(pr);
+    if (pr !== undefined || settings.speculativeBranchSelection) {
+      prInfo = await getPrInfo(api, pr, settings, gitRepoRootPath);
     }
   }
 
@@ -78,6 +85,19 @@ export function getExecutionContext(
     workspaceRoot: dirname(codeChecksFilePath),
     ...sharedExecutionCtx,
   };
+}
+
+async function getPrInfo(
+  api: Api,
+  prId: number | undefined,
+  settings: CodeChecksSettings,
+  gitRepoRootPath: string,
+): Promise<PrInfo | undefined> {
+  if (prId) {
+    return await api.prInfo(prId);
+  }
+
+  return await getPrInfoForSpeculativeBranch(settings, gitRepoRootPath);
 }
 
 export type RefInfo = {
