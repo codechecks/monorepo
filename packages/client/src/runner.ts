@@ -8,7 +8,7 @@ import { getExecutionContext, getConstExecutionContext } from "./getExecutionCon
 import { Api, getApiOptions } from "./api";
 import { CodechecksClient } from "./client";
 import { normalizePath, Path, maskSecrets } from "./utils";
-import { executeCodechecksFile, findCodechecksFiles } from "./codechecksFile";
+import { executeCodechecksFile, findCodechecksFiles, loadCodechecksSettings } from "./codechecksFile";
 import { codechecks as globalClient } from ".";
 import { checkIfIsLocalMode } from "./ci-providers/Local";
 import { logger } from "./logger";
@@ -25,8 +25,7 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
     (provider as any).setApi(api);
   }
 
-  // @todo tmp. just to silent tsc
-  const settings: any = {};
+  const settings = await loadCodechecksSettings(process.cwd());
   const sharedExecutionCtx = await getConstExecutionContext(api, provider, settings, process.cwd());
 
   if (sharedExecutionCtx.isFork) {

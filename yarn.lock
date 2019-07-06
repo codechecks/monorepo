@@ -1032,6 +1032,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/mock-fs@^3.6.30":
+  version "3.6.30"
+  resolved "https://registry.yarnpkg.com/@types/mock-fs/-/mock-fs-3.6.30.tgz#4d812541e87b23577261a5aa95f704dd3d01e410"
+  integrity sha1-TYElQeh7I1dyYaWqlfcE3T0B5BA=
+  dependencies:
+    "@types/node" "*"
+
 "@types/ms@^0.7.30":
   version "0.7.30"
   resolved "https://registry.yarnpkg.com/@types/ms/-/ms-0.7.30.tgz#f6c38b7ecbbf698b0bbd138315a0f0f18954f85f"
@@ -4649,6 +4656,11 @@ mkdirp@0.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0:
   integrity sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
   dependencies:
     minimist "0.0.8"
+
+mock-fs@^4.10.1:
+  version "4.10.1"
+  resolved "https://registry.yarnpkg.com/mock-fs/-/mock-fs-4.10.1.tgz#50a07a20114a6cdb119f35762f61f46266a1e323"
+  integrity sha512-w22rOL5ZYu6HbUehB5deurghGM0hS/xBVyHMGKOuQctkk93J9z9VEOhDsiWrXOprVNQpP9uzGKdl8v9mFspKuw==
 
 modify-values@^1.0.0:
   version "1.0.1"

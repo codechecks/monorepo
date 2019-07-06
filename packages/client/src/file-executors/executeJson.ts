@@ -4,8 +4,12 @@ export async function executeCodechecksJson(
   path: string,
   checkNameMapper: CheckNameMapper = standardNameMapper,
 ): Promise<void> {
-  const json = require(path);
+  const json = loadJson(path);
   return executeCodechecksJsonString(json, checkNameMapper);
+}
+
+export function loadJson(path: string): any {
+  return require(path);
 }
 
 export async function executeCodechecksJsonString(
