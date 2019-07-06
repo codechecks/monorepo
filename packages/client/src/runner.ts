@@ -33,6 +33,7 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
   }
   const settings = await loadCodechecksSettings(gitRoot);
   const sharedExecutionCtx = await getConstExecutionContext(api, provider, settings, gitRoot);
+  logger.debug({ sharedExecutionCtx });
 
   if (sharedExecutionCtx.isFork) {
     logger.log("Running for fork!");
@@ -48,7 +49,9 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
   for (const codecheckFile of codecheckFiles) {
     logger.log(`Executing ${bold(formatPath(codecheckFile, gitRoot))}...`);
     // do not use this instance after clone
-    const _client = new CodechecksClient(api, getExecutionContext(sharedExecutionCtx, codecheckFile));
+    const fileExecutionCtx = getExecutionContext(sharedExecutionCtx, codecheckFile);
+    logger.debug({ fileExecutionCtx });
+    const _client = new CodechecksClient(api, fileExecutionCtx);
     replaceObject(globalClient, _client);
 
     await executeCodechecksFile(codecheckFile);

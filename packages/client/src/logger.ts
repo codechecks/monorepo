@@ -5,10 +5,11 @@ import { relative } from "path";
 
 export function printLogo(): void {
   console.log(
-    `${chalk.magentaBright("code")}${chalk.bold(chalk.magenta("checks"))} Client ${chalk.dim(
+    `${chalk.magentaBright("Code")}${chalk.bold(chalk.magenta("Checks"))} ${chalk.yellow("Client")} ${chalk.dim(
       `v.${require("../package.json").version}`,
     )}`,
   );
+  console.log(formatLink("https://codechecks.io"));
   console.log();
 }
 
@@ -22,6 +23,10 @@ export function formatSHA(sha: string): string {
 
 export function formatPath(path: string, rootPath: string): string {
   return relative(rootPath, path);
+}
+
+export function formatLink(link: string): string {
+  return chalk.underline(chalk.blueBright(link));
 }
 
 class Logger {

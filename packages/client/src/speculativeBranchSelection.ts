@@ -9,6 +9,7 @@ export async function getPrInfoForSpeculativeBranch(
   settings: CodeChecksSettings,
   gitRepoRootPath: string,
 ): Promise<PrInfo | undefined> {
+  logger.debug("Trying speculative branch execution");
   const repo = await Git.Repository.open(gitRepoRootPath);
   const headCommit = await repo.getHeadCommit();
   const baseCommit = await getBaseCommit(repo, settings.branches);
