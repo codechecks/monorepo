@@ -11,12 +11,12 @@ import { normalizePath, Path, maskSecrets } from "./utils";
 import { executeCodechecksFile, findCodechecksFiles } from "./file-handling/execution";
 import { codechecks as globalClient } from ".";
 import { checkIfIsLocalMode } from "./ci-providers/Local";
-import { logger } from "./logger";
+import { logger, printLogo } from "./logger";
 import { loadCodechecksSettings } from "./file-handling/settings";
 import { findRootGitRepository } from "./utils/git";
 
 async function main(project?: string, codecheckFiles: Path[] = findCodechecksFiles(process.cwd())): Promise<void> {
-  logger.log("Running codechecks!");
+  printLogo();
   logger.log(`Executing ${codecheckFiles.length} codechecks files`);
   const startTime = new Date().getTime();
 
