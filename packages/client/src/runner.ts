@@ -8,10 +8,11 @@ import { getExecutionContext, getConstExecutionContext } from "./getExecutionCon
 import { Api, getApiOptions } from "./api";
 import { CodechecksClient } from "./client";
 import { normalizePath, Path, maskSecrets } from "./utils";
-import { executeCodechecksFile, findCodechecksFiles, loadCodechecksSettings } from "./codechecksFile";
+import { executeCodechecksFile, findCodechecksFiles } from "./file-handling/execution";
 import { codechecks as globalClient } from ".";
 import { checkIfIsLocalMode } from "./ci-providers/Local";
 import { logger } from "./logger";
+import { loadCodechecksSettings } from "./file-handling/settings";
 
 async function main(project?: string, codecheckFiles: Path[] = findCodechecksFiles(process.cwd())): Promise<void> {
   logger.log("Running codechecks!");
