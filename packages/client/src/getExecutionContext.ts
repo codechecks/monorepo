@@ -27,6 +27,7 @@ export async function getConstExecutionContext(
   let prInfo: PrInfo | undefined;
   let projectInfo: ProjectInfo;
   let localMode: { projectSlug: string } | undefined;
+  let isSpeculativePr: boolean = false;
   if (ciProvider instanceof LocalProvider) {
     projectInfo = await api.projectInfoPublic(projectSlug);
 
@@ -42,7 +43,14 @@ export async function getConstExecutionContext(
   } else {
     projectInfo = await api.projectInfo();
     if (pr !== undefined || settings.speculativeBranchSelection) {
-      prInfo = await getPrInfo(api, pr, settings, gitRepoRootPath);
+      if (pr) {
+        prInfo = await api.prInfo(pr);
+      } else {
+        prInfo = await getPrInfoForSpeculativeBranch(settings, gitRepoRootPath);
+        if (prInfo) {
+          isSpeculativePr = true;
+        }
+      }
     }
   }
 
@@ -59,6 +67,7 @@ export async function getConstExecutionContext(
       isLocalMode: localMode,
       pr: prInfo,
       isFork,
+      isSpeculativePr,
     };
   } else {
     return {
@@ -72,6 +81,7 @@ export async function getConstExecutionContext(
       currentSha,
       isLocalMode: localMode,
       isFork,
+      isSpeculativePr: false,
     };
   }
 }
@@ -85,19 +95,6 @@ export function getExecutionContext(
     workspaceRoot: dirname(codeChecksFilePath),
     ...sharedExecutionCtx,
   };
-}
-
-async function getPrInfo(
-  api: Api,
-  prId: number | undefined,
-  settings: CodeChecksSettings,
-  gitRepoRootPath: string,
-): Promise<PrInfo | undefined> {
-  if (prId) {
-    return await api.prInfo(prId);
-  }
-
-  return await getPrInfoForSpeculativeBranch(settings, gitRepoRootPath);
 }
 
 export type RefInfo = {
@@ -128,4 +125,5 @@ interface ConstantExecutionContext {
     projectSlug: string;
   };
   isFork: boolean;
+  isSpeculativePr: boolean;
 }
