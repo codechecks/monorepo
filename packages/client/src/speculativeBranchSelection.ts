@@ -37,7 +37,7 @@ async function getBaseCommit(
   speculativeBranchesInOrder: string[],
 ): Promise<Git.Commit | undefined> {
   const headBranch = await repo.getCurrentBranch();
-  const baseBranchName = findSpeculativeBaseBranch(headBranch.name(), speculativeBranchesInOrder);
+  const baseBranchName = findSpeculativeBaseBranch(headBranch.shorthand(), speculativeBranchesInOrder);
 
   if (baseBranchName) {
     return await repo.getBranchCommit(baseBranchName);

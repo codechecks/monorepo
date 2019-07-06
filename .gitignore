@@ -3,3 +3,4 @@ lib
 dist
 env.js
 coverage
+packages/client/src/__tests__/dummy-repo
