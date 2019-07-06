@@ -21,9 +21,6 @@
   "types": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "test": "yarn test:mocha",
-    "test:fix": "yarn test:mocha",
-    "test:mocha": "mocha --reporter spec --require ts-node/register 'src/**/*.spec.ts'",
     "build": "rm -rf ./dist && cp -R '../../dist/client/' ./dist/ && chmod +x ./dist/runner.js",
     "prepublishOnly": "cd ../../ && yarn build"
   },
