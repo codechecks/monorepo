@@ -14,6 +14,7 @@
     "test": "yarn format && yarn tslint && yarn tsc && yarn test:jest",
     "test:fix": "yarn format:fix && yarn tslint:fix && yarn tsc && yarn test:jest",
     "test:jest": "jest --runInBand --bail",
+    "test:jest:update": "jest --runInBand --bail -u",
     "test:jest:cov": "jest --runInBand --bail --coverage",
     "prepublishOnly": "yarn test && yarn build"
   },

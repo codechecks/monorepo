@@ -39,6 +39,6 @@ function loadSettingsFromFile(filePath: string): CodeChecksSettings | undefined 
 function normalizeSettings(userProvidedSettings: DeepPartial<CodeChecksSettings> = {}): CodeChecksSettings {
   return {
     speculativeBranchSelection: userProvidedSettings.speculativeBranchSelection === false ? false : true,
-    speculativeBranches: userProvidedSettings.speculativeBranches || ["master"],
+    branches: userProvidedSettings.branches || ["master"],
   };
 }

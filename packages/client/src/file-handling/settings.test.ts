@@ -15,10 +15,10 @@ describe("loadCodechecksSettings", () => {
     mockFS.restore();
     expect(actualSettings).toMatchInlineSnapshot(`
 Object {
-  "speculativeBranchSelection": true,
-  "speculativeBranches": Array [
+  "branches": Array [
     "master",
   ],
+  "speculativeBranchSelection": true,
 }
 `);
   });
@@ -30,7 +30,7 @@ Object {
 checks:
   - not-important-check
 settings:
-  speculativeBranches:
+  branches:
     - dev
     - master
 `,
@@ -42,11 +42,11 @@ settings:
     mockFS.restore();
     expect(actualSettings).toMatchInlineSnapshot(`
 Object {
-  "speculativeBranchSelection": true,
-  "speculativeBranches": Array [
+  "branches": Array [
     "dev",
     "master",
   ],
+  "speculativeBranchSelection": true,
 }
 `);
   });
@@ -57,7 +57,7 @@ Object {
         "codechecks.yml": `
 {
   "settings": {
-    "speculativeBranches": ["dev", "master"]
+    "branches": ["dev", "master"]
   }
 }
         
@@ -70,11 +70,11 @@ Object {
     mockFS.restore();
     expect(actualSettings).toMatchInlineSnapshot(`
 Object {
-  "speculativeBranchSelection": true,
-  "speculativeBranches": Array [
+  "branches": Array [
     "dev",
     "master",
   ],
+  "speculativeBranchSelection": true,
 }
 `);
   });

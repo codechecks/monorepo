@@ -16,5 +16,5 @@ export interface CodeChecksReport extends CodeChecksReportBody {
 
 export interface CodeChecksSettings {
   speculativeBranchSelection: boolean;
-  speculativeBranches: string[];
+  branches: string[];
 }

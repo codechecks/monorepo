@@ -14,7 +14,7 @@ describe("getPrInfoForSpeculativeBranch", () => {
   it("should work when no changes were made", async () => {
     const settings: CodeChecksSettings = {
       speculativeBranchSelection: true,
-      speculativeBranches: ["master"],
+      branches: ["master"],
     };
 
     await prepareRepo(repoPath);
@@ -27,7 +27,7 @@ describe("getPrInfoForSpeculativeBranch", () => {
   it("should work when with various changes", async () => {
     const settings: CodeChecksSettings = {
       speculativeBranchSelection: true,
-      speculativeBranches: ["master"],
+      branches: ["master"],
     };
 
     await prepareRepo(repoPath);
@@ -67,7 +67,7 @@ Object {
   it("should work when with deleted files", async () => {
     const settings: CodeChecksSettings = {
       speculativeBranchSelection: true,
-      speculativeBranches: ["master"],
+      branches: ["master"],
     };
 
     await prepareRepo(repoPath);

@@ -9,7 +9,7 @@ export async function getPrInfoForSpeculativeBranch(
 ): Promise<PrInfo | undefined> {
   const repo = await Git.Repository.open(gitRepoRootPath);
   const headCommit = await repo.getHeadCommit();
-  const baseCommit = await getBaseCommit(repo, settings.speculativeBranches);
+  const baseCommit = await getBaseCommit(repo, settings.branches);
   if (!baseCommit) {
     return;
   }
