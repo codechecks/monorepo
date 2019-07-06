@@ -8,10 +8,12 @@ import { getExecutionContext, getConstExecutionContext } from "./getExecutionCon
 import { Api, getApiOptions } from "./api";
 import { CodechecksClient } from "./client";
 import { normalizePath, Path, maskSecrets } from "./utils";
-import { executeCodechecksFile, findCodechecksFiles } from "./codechecksFile";
+import { executeCodechecksFile, findCodechecksFiles } from "./file-handling/execution";
 import { codechecks as globalClient } from ".";
 import { checkIfIsLocalMode } from "./ci-providers/Local";
 import { logger } from "./logger";
+import { loadCodechecksSettings } from "./file-handling/settings";
+import { findRootGitRepository } from "./utils/git";
 
 async function main(project?: string, codecheckFiles: Path[] = findCodechecksFiles(process.cwd())): Promise<void> {
   logger.log("Running codechecks!");
@@ -25,7 +27,12 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
     (provider as any).setApi(api);
   }
 
-  const sharedExecutionCtx = await getConstExecutionContext(api, provider);
+  const gitRoot = findRootGitRepository(process.cwd());
+  if (!gitRoot) {
+    throw new Error("Couldn't find project root!");
+  }
+  const settings = await loadCodechecksSettings(gitRoot);
+  const sharedExecutionCtx = await getConstExecutionContext(api, provider, settings, gitRoot);
 
   if (sharedExecutionCtx.isFork) {
     logger.log("Running for fork!");

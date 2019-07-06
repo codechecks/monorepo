@@ -4,11 +4,18 @@ import { DeepReadonly } from "ts-essentials";
 import { Path } from "./utils";
 import { dirname } from "path";
 import { LocalProvider } from "./ci-providers/Local";
+import { CodeChecksSettings } from "./types";
+import { getPrInfoForSpeculativeBranch } from "./speculativeBranchSelection";
 
 /**
  * Better part of execution context stays the same for all codechecks files being executed so we just get it once.
  */
-export async function getConstExecutionContext(api: Api, ciProvider: CiProvider): Promise<ConstantExecutionContext> {
+export async function getConstExecutionContext(
+  api: Api,
+  ciProvider: CiProvider,
+  settings: CodeChecksSettings,
+  gitRepoRootPath: string,
+): Promise<ConstantExecutionContext> {
   const currentSha = await ciProvider.getCurrentSha();
   const isFork = await ciProvider.isFork();
   const pr = await ciProvider.getPullRequestID();
@@ -20,6 +27,7 @@ export async function getConstExecutionContext(api: Api, ciProvider: CiProvider)
   let prInfo: PrInfo | undefined;
   let projectInfo: ProjectInfo;
   let localMode: { projectSlug: string } | undefined;
+  let isSpeculativePr: boolean = false;
   if (ciProvider instanceof LocalProvider) {
     projectInfo = await api.projectInfoPublic(projectSlug);
 
@@ -34,8 +42,15 @@ export async function getConstExecutionContext(api: Api, ciProvider: CiProvider)
     }
   } else {
     projectInfo = await api.projectInfo();
-    if (pr !== undefined) {
-      prInfo = await api.prInfo(pr);
+    if (pr !== undefined || settings.speculativeBranchSelection) {
+      if (pr) {
+        prInfo = await api.prInfo(pr);
+      } else {
+        prInfo = await getPrInfoForSpeculativeBranch(settings, gitRepoRootPath);
+        if (prInfo) {
+          isSpeculativePr = true;
+        }
+      }
     }
   }
 
@@ -52,6 +67,7 @@ export async function getConstExecutionContext(api: Api, ciProvider: CiProvider)
       isLocalMode: localMode,
       pr: prInfo,
       isFork,
+      isSpeculativePr,
     };
   } else {
     return {
@@ -65,6 +81,7 @@ export async function getConstExecutionContext(api: Api, ciProvider: CiProvider)
       currentSha,
       isLocalMode: localMode,
       isFork,
+      isSpeculativePr: false,
     };
   }
 }
@@ -108,4 +125,5 @@ interface ConstantExecutionContext {
     projectSlug: string;
   };
   isFork: boolean;
+  isSpeculativePr: boolean;
 }

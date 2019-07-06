@@ -13,3 +13,8 @@ export type CodeChecksReportStatus = "success" | "failure";
 export interface CodeChecksReport extends CodeChecksReportBody {
   status: CodeChecksReportStatus;
 }
+
+export interface CodeChecksSettings {
+  speculativeBranchSelection: boolean;
+  branches: string[];
+}

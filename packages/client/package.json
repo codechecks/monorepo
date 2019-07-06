@@ -13,13 +13,17 @@
   ],
   "repository": "codechecks/monorepo",
   "author": "Chris Kaczor <chris@kaczor.io>",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index.js",
   "bin": {
     "codechecks": "dist/runner.js"
   },
   "types": "dist/index.d.ts",
   "license": "MIT",
+  "scripts": {
+    "build": "rm -rf ./dist && cp -R '../../dist/client/' ./dist/ && chmod +x ./dist/runner.js",
+    "prepublishOnly": "cd ../../ && yarn build"
+  },
   "dependencies": {
     "bluebird": "^3.5.3",
     "commander": "^2.19.0",
@@ -34,6 +38,7 @@
     "marked-terminal": "^3.2.0",
     "mkdirp": "^0.5.1",
     "ms": "^2.1.1",
+    "nodegit": "^0.24.3",
     "promise": "^8.0.2",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
@@ -52,14 +57,8 @@
     "@types/marked-terminal": "^3.1.1",
     "@types/mkdirp": "^0.5.2",
     "@types/ms": "^0.7.30",
+    "@types/nodegit": "^0.24.8",
     "@types/request-promise": "^4.1.42"
-  },
-  "scripts": {
-    "test": "yarn test:mocha",
-    "test:fix": "yarn test:mocha",
-    "test:mocha": "mocha --reporter spec --require ts-node/register 'src/**/*.spec.ts'",
-    "build": "rm -rf ./dist && cp -R '../../dist/client/' ./dist/ && chmod +x ./dist/runner.js",
-    "prepublish": "cd ../../ && yarn build"
   },
   "files": [
     "dist/**/*"

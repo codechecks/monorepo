@@ -1,12 +1,19 @@
 import { join, extname } from "path";
 import { existsSync } from "fs";
-import { Path } from "./utils";
-import { executeTs } from "./file-executors/tsExecutor";
-import { executeJs } from "./file-executors/jsExecutor";
-import { executeCodechecksJson } from "./file-executors/executeJson";
-import { executeCodechecksYaml } from "./file-executors/executeYaml";
 
-const CODECHECKS_NAMES = ["codechecks.yml", "codechecks.yaml", "codechecks.json", "codechecks.ts", "codechecks.js"];
+import { Path } from "../utils";
+import { executeTs } from "../file-executors/tsExecutor";
+import { executeJs } from "../file-executors/jsExecutor";
+import { executeCodechecksJson } from "../file-executors/executeJson";
+import { executeCodechecksYaml } from "../file-executors/executeYaml";
+
+const CODECHECKS_FILES_NAMES = [
+  "codechecks.yml",
+  "codechecks.yaml",
+  "codechecks.json",
+  "codechecks.ts",
+  "codechecks.js",
+];
 
 export async function executeCodechecksFile(codeChecksFilePath: string): Promise<void> {
   const extension = extname(codeChecksFilePath).slice(1);
@@ -27,7 +34,7 @@ export async function executeCodechecksFile(codeChecksFilePath: string): Promise
 }
 
 export function findCodechecksFiles(basePath: string): Path[] {
-  const existingFiles = CODECHECKS_NAMES.map(n => join(basePath, n)).filter(filePath => {
+  const existingFiles = CODECHECKS_FILES_NAMES.map(n => join(basePath, n)).filter(filePath => {
     return existsSync(filePath);
   });
 

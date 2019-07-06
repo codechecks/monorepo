@@ -1,6 +1,5 @@
-import { executeCodechecksFile } from "../codechecksFile";
+import { executeCodechecksFile } from "../file-handling/execution";
 import { join } from "path";
-import { expect } from "chai";
 import { CodechecksJson, executeCodechecksJsonString } from "../file-executors/executeJson";
 
 describe("executeCodechecksFiles", () => {
@@ -16,7 +15,7 @@ describe("executeCodechecksFiles", () => {
       await executeCodechecksFile(filename);
 
       // any better idea to communicate between modules?
-      expect((global as any)[filename]).to.be.true;
+      expect((global as any)[filename]).toBe(true);
     }
   });
 
@@ -26,7 +25,7 @@ describe("executeCodechecksFiles", () => {
     for (const filename of filenames) {
       await executeCodechecksFile(filename);
 
-      expect((global as any)[filename]).to.be.true;
+      expect((global as any)[filename]).toBe(true);
     }
   });
 
@@ -38,12 +37,12 @@ describe("executeCodechecksFiles", () => {
     const moduleFullPath = join(__dirname, "./modules/loaded-by-json.ts");
 
     const dummyNameResolver = (checkName: string): string => {
-      expect(checkName).to.be.eq("build-size-watcher");
+      expect(checkName).toBe("build-size-watcher");
 
       return moduleFullPath;
     };
 
     await executeCodechecksJsonString(dummyJsonConfig, dummyNameResolver);
-    expect((global as any)[moduleFullPath]).to.be.true;
+    expect((global as any)[moduleFullPath]).toBe(true);
   });
 });
