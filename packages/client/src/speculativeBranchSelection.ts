@@ -2,6 +2,8 @@ import * as Git from "nodegit";
 
 import { PrInfo, FileStatuses } from "./api";
 import { CodeChecksSettings } from "./types";
+import { logger } from "./logger";
+import execa = require("execa");
 
 export async function getPrInfoForSpeculativeBranch(
   settings: CodeChecksSettings,
@@ -12,6 +14,11 @@ export async function getPrInfoForSpeculativeBranch(
   const baseCommit = await getBaseCommit(repo, settings.branches);
   if (!baseCommit) {
     return;
+  }
+  if (baseCommit.sha() === headCommit.sha()) {
+    throw new Error(
+      "Speculative branch selection failed. baseCommit can't be equal to headCommit. Please create Pull Request to skip this problem.",
+    );
   }
 
   const fileStatuses = await getFileStatuses(repo, baseCommit, headCommit);
@@ -39,8 +46,19 @@ async function getBaseCommit(
   const headBranch = await repo.getCurrentBranch();
   const baseBranchName = findSpeculativeBaseBranch(headBranch.shorthand(), speculativeBranchesInOrder);
 
+  logger.debug({ baseBranchName });
+
   if (baseBranchName) {
-    return await repo.getBranchCommit(baseBranchName);
+    // @NOTE: this might be CircleCI specific thing but for some reason we NEED to take remote branch origin/* because local one is somehow already updated but this might now work on some environments...
+    try {
+      const { stdout, stderr } = await execa("git fetch --all", { shell: true });
+      logger.debug({ stdout, stderr });
+      return await repo.getBranchCommit(`origin/${baseBranchName}`);
+    } catch (e) {
+      logger.debug(e);
+      logger.debug(`Failed to access origin/${baseBranchName}. Trying with: ${baseBranchName}`);
+      return await repo.getBranchCommit(baseBranchName);
+    }
   }
 }
 
