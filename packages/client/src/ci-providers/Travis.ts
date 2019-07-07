@@ -10,8 +10,8 @@ export class Travis implements CiProvider {
   getPullRequestID(): number | undefined {
     const prNumberRaw = this.env["TRAVIS_PULL_REQUEST"] || "false";
 
-    if (prNumberRaw === "false"){
-      return undefined
+    if (prNumberRaw === "false") {
+      return undefined;
     }
 
     return parseInt(prNumberRaw);
