@@ -18,7 +18,14 @@ export class Travis implements CiProvider {
   }
 
   getCurrentSha(): string {
-    const sha = this.env["TRAVIS_PULL_REQUEST_SHA"];
+    let sha;
+
+    if (this.env["TRAVIS_PULL_REQUEST_SHA"]) {
+      sha = this.env["TRAVIS_PULL_REQUEST_SHA"];
+    } else {
+      sha = this.env["TRAVIS_COMMIT"];
+    }
+
     if (!sha) {
       throw new Error("Couldnt get target SHA");
     }
@@ -27,7 +34,7 @@ export class Travis implements CiProvider {
   }
 
   isFork(): boolean {
-    if (!this.env["TRAVIS_PULL_REQUEST"]) {
+    if (this.env["TRAVIS_PULL_REQUEST"] === "false") {
       return false;
     }
 
