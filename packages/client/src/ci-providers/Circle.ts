@@ -48,4 +48,8 @@ export class Circle implements CiProvider {
 
     return `${user}/${projectName}`;
   }
+
+  public supportsSpeculativeBranchSelection(): boolean {
+    return true;
+  }
 }

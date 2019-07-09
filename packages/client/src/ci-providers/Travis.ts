@@ -50,4 +50,9 @@ export class Travis implements CiProvider {
 
     return slug;
   }
+
+  // we don't need to attempt to guess the PR base branch because travis always triggers /pr builds when PR (or fork) is created
+  public supportsSpeculativeBranchSelection(): boolean {
+    return false;
+  }
 }

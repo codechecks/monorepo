@@ -8,6 +8,7 @@ export type CiProvider = {
   isFork(): AsyncOrSync<boolean>;
   getPullRequestID(): AsyncOrSync<number | undefined>;
   getProjectSlug(): AsyncOrSync<string>;
+  supportsSpeculativeBranchSelection(): AsyncOrSync<boolean>;
 };
 
 export type Env = Dictionary<string | undefined>;
