@@ -18,7 +18,7 @@ export class Travis implements CiProvider {
   }
 
   getCurrentSha(): string {
-    let sha;
+    let sha: string | undefined;
 
     if (this.env["TRAVIS_PULL_REQUEST_SHA"]) {
       sha = this.env["TRAVIS_PULL_REQUEST_SHA"];
