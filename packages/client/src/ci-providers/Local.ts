@@ -72,6 +72,10 @@ export class LocalProvider implements CiProvider {
   public isFork(): boolean {
     return false;
   }
+
+  public supportsSpeculativeBranchSelection(): boolean {
+    return true;
+  }
 }
 
 export function checkIfIsLocalMode(provider: CiProvider): boolean {

@@ -45,7 +45,7 @@ export async function getConstExecutionContext(
     if (pr !== undefined || settings.speculativeBranchSelection) {
       if (pr) {
         prInfo = await api.prInfo(pr);
-      } else {
+      } else if (ciProvider.supportsSpeculativeBranchSelection()) {
         prInfo = await getPrInfoForSpeculativeBranch(settings, gitRepoRootPath);
         if (prInfo) {
           isSpeculativePr = true;
