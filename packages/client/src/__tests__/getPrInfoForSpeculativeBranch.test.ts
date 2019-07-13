@@ -100,6 +100,46 @@ Object {
 }
 `);
   });
+
+  it("should work when with moved files", async () => {
+    const settings: CodeChecksSettings = {
+      speculativeBranchSelection: true,
+      branches: ["master"],
+    };
+
+    await prepareRepo(repoPath);
+
+    await fse.remove(indexPathAbs);
+    await fse.writeFile(index2PathAbs, `console.log("Hello world!");`);
+
+    await makeBranchAndCheckout(repoPath, "feature1");
+    await makeCommit(repoPath, "second commit");
+
+    const prInfo = await getPrInfoForSpeculativeBranch(settings, repoPath);
+
+    const deterministicPrInfo = { ...prInfo, base: {}, head: {} };
+
+    expect(deterministicPrInfo).toMatchInlineSnapshot(`
+Object {
+  "base": Object {},
+  "files": Object {
+    "added": Array [
+      "index2.js",
+    ],
+    "changed": Array [],
+    "removed": Array [
+      "index.js",
+    ],
+  },
+  "head": Object {},
+  "id": 0,
+  "meta": Object {
+    "body": "",
+    "title": "",
+  },
+}
+`);
+  });
 });
 
 async function prepareRepo(repoPath: string): Promise<void> {
