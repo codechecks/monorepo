@@ -5,7 +5,7 @@ import * as JSON5 from "json5";
 import { moduleExecutor } from "./moduleExecutor";
 import { logger } from "../logger";
 
-export async function executeTs(filePath: string): Promise<void> {
+export async function executeTs(filePath: string, options: any): Promise<void> {
   const customModuleHandler = (module: any, filename: string) => {
     const compiled = transpileTypescriptModule(filename);
     module._compile(compiled, filename);
@@ -22,7 +22,7 @@ export async function executeTs(filePath: string): Promise<void> {
     throw e;
   }
 
-  await moduleExecutor(codeChecksModule);
+  await moduleExecutor(codeChecksModule, options);
 }
 
 export function transpileTypescriptModule(path: string): string {

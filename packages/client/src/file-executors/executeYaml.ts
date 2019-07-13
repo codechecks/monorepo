@@ -4,7 +4,7 @@ import { readFileSync } from "fs";
 
 export async function executeCodechecksYaml(
   path: string,
-  checkNameMapper: CheckNameMapper = standardNameMapper,
+  checkNameMapper: CheckNameMapper = standardNameMapper(path),
 ): Promise<void> {
   const json = loadYaml(path);
   return executeCodechecksJsonString(json, checkNameMapper);

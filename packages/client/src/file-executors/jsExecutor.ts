@@ -1,7 +1,7 @@
 import { moduleExecutor } from "./moduleExecutor";
 import { logger } from "../logger";
 
-export async function executeJs(filePath: string): Promise<void> {
+export async function executeJs(filePath: string, options: any): Promise<void> {
   let codeChecksModule;
   try {
     codeChecksModule = require(filePath);
@@ -10,5 +10,5 @@ export async function executeJs(filePath: string): Promise<void> {
     throw e;
   }
 
-  await moduleExecutor(codeChecksModule);
+  await moduleExecutor(codeChecksModule, options);
 }

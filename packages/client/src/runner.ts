@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+
+require("./utils/hijackModuleLoading");
+
 import { inspect } from "util";
 import * as program from "commander";
 import ms = require("ms");
@@ -8,7 +11,7 @@ import { getExecutionContext, getConstExecutionContext } from "./getExecutionCon
 import { Api, getApiOptions } from "./api";
 import { CodechecksClient } from "./client";
 import { normalizePath, Path, maskSecrets } from "./utils";
-import { executeCodechecksFile, findCodechecksFiles } from "./file-handling/execution";
+import { executeCodechecksFile, findCodechecksFiles } from "./file-executors/execution";
 import { codechecks as globalClient } from ".";
 import { checkIfIsLocalMode } from "./ci-providers/Local";
 import { logger, printLogo, bold, formatSHA, formatPath } from "./logger";
@@ -35,6 +38,8 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
   const sharedExecutionCtx = await getConstExecutionContext(api, provider, settings, gitRoot);
   logger.debug({ sharedExecutionCtx });
 
+  (api as any).sharedCtx = sharedExecutionCtx;
+
   if (sharedExecutionCtx.isFork) {
     logger.log("Running for fork!");
   }
@@ -48,11 +53,13 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
 
   for (const codecheckFile of codecheckFiles) {
     logger.log(`Executing ${bold(formatPath(codecheckFile, gitRoot))}...`);
+    logger.log();
     // do not use this instance after clone
     const fileExecutionCtx = getExecutionContext(sharedExecutionCtx, codecheckFile);
     logger.debug({ fileExecutionCtx });
     const _client = new CodechecksClient(api, fileExecutionCtx);
     replaceObject(globalClient, _client);
+    (global as any).__codechecks_client = _client;
 
     await executeCodechecksFile(codecheckFile);
   }

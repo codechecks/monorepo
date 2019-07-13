@@ -15,7 +15,7 @@ export async function getConstExecutionContext(
   ciProvider: CiProvider,
   settings: CodeChecksSettings,
   gitRepoRootPath: string,
-): Promise<ConstantExecutionContext> {
+): Promise<SharedExecutionContext> {
   const currentSha = await ciProvider.getCurrentSha();
   const isFork = await ciProvider.isFork();
   const pr = await ciProvider.getPullRequestID();
@@ -26,13 +26,25 @@ export async function getConstExecutionContext(
 
   let prInfo: PrInfo | undefined;
   let projectInfo: ProjectInfo;
-  let localMode: { projectSlug: string } | undefined;
+  let localMode: SharedExecutionContext["isLocalMode"] | undefined;
   let isSpeculativePr: boolean = false;
   if (ciProvider instanceof LocalProvider) {
-    projectInfo = await api.projectInfoPublic(projectSlug);
+    let isOffline = false;
+    try {
+      projectInfo = await api.projectInfoPublic(projectSlug);
+    } catch {
+      isOffline = true;
+      projectInfo = {
+        projectSlug: "local/project",
+        artifactsProxyUrl: "http://nowhere",
+        artifactsProxySupportsPages: true,
+        isPrivate: false,
+      };
+    }
 
     localMode = {
       projectSlug,
+      isOffline,
     };
     prInfo = await ciProvider.getPrInfo();
   } else if (isFork) {
@@ -87,7 +99,7 @@ export async function getConstExecutionContext(
 }
 
 export function getExecutionContext(
-  sharedExecutionCtx: ConstantExecutionContext,
+  sharedExecutionCtx: SharedExecutionContext,
   codeChecksFilePath: Path,
 ): ExecutionContext {
   return {
@@ -105,13 +117,13 @@ export type ExecutionContext = DeepReadonly<
   {
     codeChecksFileAbsPath: string;
     workspaceRoot: string; // directory containing current CodeChecks file
-  } & ConstantExecutionContext
+  } & SharedExecutionContext
 >;
 
 /**
  * This stays the same across different codechecks files
  */
-interface ConstantExecutionContext {
+export interface SharedExecutionContext {
   projectSlug: string;
   artifactsProxy: {
     url: string;
@@ -123,6 +135,7 @@ interface ConstantExecutionContext {
   pr?: PrInfo;
   isLocalMode?: {
     projectSlug: string;
+    isOffline: boolean;
   };
   isFork: boolean;
   isSpeculativePr: boolean;
