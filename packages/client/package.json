@@ -39,7 +39,6 @@
     "marked-terminal": "^3.2.0",
     "mkdirp": "^0.5.1",
     "ms": "^2.1.1",
-    "nodegit": "^0.24.3",
     "promise": "^8.0.2",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
