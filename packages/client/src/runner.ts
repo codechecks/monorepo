@@ -35,6 +35,8 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
   const sharedExecutionCtx = await getConstExecutionContext(api, provider, settings, gitRoot);
   logger.debug({ sharedExecutionCtx });
 
+  (api as any).sharedCtx = sharedExecutionCtx;
+
   if (sharedExecutionCtx.isFork) {
     logger.log("Running for fork!");
   }

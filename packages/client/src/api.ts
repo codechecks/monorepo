@@ -11,6 +11,7 @@ import { Promise as Bluebird, delay } from "bluebird";
 import { logger } from "./logger";
 
 import request = require("request");
+import { SharedExecutionContext } from "./getExecutionContext";
 
 const DEFAULT_HOST = "https://api.codechecks.io/v1";
 // we limit concurrent connections to avoid DOSing our own backend
@@ -27,6 +28,7 @@ export interface ApiOptions {
 export class Api {
   private readonly requestPromise: typeof requestPromise;
   private readonly requestRaw: typeof request;
+  private readonly sharedCtx!: SharedExecutionContext;
 
   constructor(options: ApiOptions) {
     this.requestPromise = requestPromise.defaults({
@@ -60,7 +62,7 @@ export class Api {
     return this.saveFileWithRetry(fullKey, getContents, MAX_RETRY, projectSlug, contentType);
   }
 
-  public async getFileAsString(fullKey: string, projectSlug?: string): Promise<string> {
+  public async getFileAsString(fullKey: string, projectSlug?: string): Promise<string | undefined> {
     return await this.getFileWithRetry(fullKey, MAX_RETRY, projectSlug);
   }
 
@@ -140,7 +142,7 @@ export class Api {
   public async getValue<T>(name: string, key: string, projectSlug?: string): Promise<T | undefined> {
     try {
       const res = await this.getFileAsString(`${key}/${name}.json`, projectSlug);
-      return JSON.parse(res).value;
+      return JSON.parse(res || "").value;
     } catch (e) {
       if (e instanceof StatusCodeError && e.statusCode === 404) {
         return undefined;
@@ -171,7 +173,7 @@ export class Api {
     try {
       const fileString = await this.getFileAsString(fullKey, projectSlug);
 
-      writeFile(destinationPath, fileString);
+      writeFile(destinationPath, fileString || "");
     } catch (e) {
       if (e.statusCode !== 404) {
         throw e;
@@ -197,7 +199,7 @@ export class Api {
         // fullKey looks like: SHA/name/x/y/z so we need to slice `SHA/name` path
         const finalPath = join(destinationPath, fullKey.substring(key.length + name.length + "/".length));
 
-        writeFile(finalPath, file);
+        writeFile(finalPath, file || "");
       },
       { concurrency: MAX_CONNECTIONS },
     );
@@ -265,11 +267,17 @@ export class Api {
   }
   /* #endregion */
 
-  private async getFileWithRetry(_fullKey: string, retry: number, projectSlug?: string): Promise<string> {
+  private async getFileWithRetry(_fullKey: string, retry: number, projectSlug?: string): Promise<string | undefined> {
     const fullKey = encodeURI(_fullKey);
     let file: string;
     try {
       logger.debug("Getting file: ", fullKey);
+      if (this.sharedCtx.isLocalMode && this.sharedCtx.isLocalMode.isOffline) {
+        logger.debug("Offline mode. Skipping...");
+
+        return undefined;
+      }
+
       if (projectSlug) {
         file = await this.requestPromise.get(`public/files/${fullKey}`, {
           qs: {
@@ -306,6 +314,12 @@ export class Api {
     try {
       await new Promise<void>((resolve, reject) => {
         logger.debug("Saving file: ", fullKey);
+        if (this.sharedCtx.isLocalMode && this.sharedCtx.isLocalMode.isOffline) {
+          logger.debug("Offline mode. Skipping...");
+
+          return;
+        }
+
         getContents()
           .pipe(
             projectSlug
