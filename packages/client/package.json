@@ -57,7 +57,6 @@
     "@types/marked-terminal": "^3.1.1",
     "@types/mkdirp": "^0.5.2",
     "@types/ms": "^0.7.30",
-    "@types/nodegit": "^0.24.8",
     "@types/request-promise": "^4.1.42"
   },
   "files": [
