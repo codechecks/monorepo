@@ -13,7 +13,7 @@
   ],
   "repository": "codechecks/monorepo",
   "author": "Chris Kaczor <chris@kaczor.io>",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "dist/index.js",
   "bin": {
     "codechecks": "dist/runner.js"
