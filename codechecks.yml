@@ -1,2 +1,7 @@
 checks:
   - name: type-coverage-watcher
+
+  - name: ban-deps-codecheck
+    options:
+      - name: node-gyp
+        reason: "No native modules, please! They make installation for users much harder"
