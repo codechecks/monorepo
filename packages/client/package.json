@@ -21,7 +21,7 @@
   "types": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf ./dist && cp -R '../../dist/client/' ./dist/ && chmod +x ./dist/runner.js",
+    "build": "rm -rf ./dist && cp -R '../../dist/client/' ./dist/ && cp -R ./src/js ./dist/js && chmod +x ./dist/runner.js",
     "prepublishOnly": "cd ../../ && yarn build"
   },
   "dependencies": {

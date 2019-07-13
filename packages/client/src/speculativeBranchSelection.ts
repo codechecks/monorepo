@@ -3,7 +3,7 @@ import { CodeChecksSettings } from "./types";
 import { logger } from "./logger";
 import execa = require("execa");
 
-const diffParser = require("./diff-parser/diff-parser.js").DiffParser;
+const diffParser = require("./js/diff-parser/diff-parser.js").DiffParser;
 
 export async function getPrInfoForSpeculativeBranch(
   settings: CodeChecksSettings,
