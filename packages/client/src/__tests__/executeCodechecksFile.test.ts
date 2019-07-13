@@ -1,4 +1,4 @@
-import { executeCodechecksFile } from "../file-handling/execution";
+import { executeCodechecksFile } from "../file-executors/execution";
 import { join } from "path";
 import { CodechecksJson, executeCodechecksJsonString } from "../file-executors/executeJson";
 

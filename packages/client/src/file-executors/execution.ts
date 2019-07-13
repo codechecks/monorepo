@@ -2,10 +2,10 @@ import { join, extname } from "path";
 import { existsSync } from "fs";
 
 import { Path } from "../utils";
-import { executeTs } from "../file-executors/tsExecutor";
-import { executeJs } from "../file-executors/jsExecutor";
-import { executeCodechecksJson } from "../file-executors/executeJson";
-import { executeCodechecksYaml } from "../file-executors/executeYaml";
+import { executeTs } from "./tsExecutor";
+import { executeJs } from "./jsExecutor";
+import { executeCodechecksJson } from "./executeJson";
+import { executeCodechecksYaml } from "./executeYaml";
 
 const CODECHECKS_FILES_NAMES = [
   "codechecks.yml",
@@ -15,14 +15,15 @@ const CODECHECKS_FILES_NAMES = [
   "codechecks.js",
 ];
 
-export async function executeCodechecksFile(codeChecksFilePath: string): Promise<void> {
+export async function executeCodechecksFile(codeChecksFilePath: string, options?: any): Promise<void> {
   const extension = extname(codeChecksFilePath).slice(1);
 
   switch (extension) {
     case "ts":
-      return await executeTs(codeChecksFilePath);
+      return await executeTs(codeChecksFilePath, options);
     case "js":
-      return await executeJs(codeChecksFilePath);
+    case "": // requiring a module
+      return await executeJs(codeChecksFilePath, options);
     case "json":
       return await executeCodechecksJson(codeChecksFilePath);
     case "yml":

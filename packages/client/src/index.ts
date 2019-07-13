@@ -1,6 +1,6 @@
 import { CodechecksClient } from "./client";
 
-// this gets injected later in the runtime
-export const codechecks: CodechecksClient = {} as any;
+// try using global codechecks client, if it doesnt exist it will be injected later
+export const codechecks: CodechecksClient = (global as any).__codechecks_client || {};
 
 export * from "./types";

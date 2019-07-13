@@ -84,27 +84,29 @@ export function checkIfIsLocalMode(provider: CiProvider): boolean {
 
 import * as marked from "marked";
 import * as TerminalRenderer from "marked-terminal";
+import { logger } from "../logger";
+import chalk from "chalk";
 
 marked.setOptions({
   // Define custom renderer
   renderer: new TerminalRenderer(),
 });
 
-export function printCheck(checks: CodeChecksReport): void {
+export function printCheck(report: CodeChecksReport): void {
   console.log(
     marked(`
-# ${checks.name} 
-${checks.shortDescription}`),
+# ${report.status === "success" ? "✅" : "❌"} ${report.name} 
+${report.shortDescription}`),
   );
 
-  if (checks.longDescription) {
+  if (report.longDescription) {
     console.log(
       marked(`
 ## Long description: 
-${checks.longDescription}
-    `),
+${report.longDescription}`),
     );
   }
 
-  console.log("----------------------");
+  logger.log(chalk.dim("---------------"));
+  logger.log();
 }

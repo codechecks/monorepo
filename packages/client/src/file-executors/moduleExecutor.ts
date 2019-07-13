@@ -1,6 +1,6 @@
 import { isFunction } from "util";
 
-export async function moduleExecutor(module: any): Promise<void> {
+export async function moduleExecutor(module: any, options: any): Promise<void> {
   const hasDefaultExport = !!module.default;
   const hasMainExport = !!module.main;
   const hasDefaultCommonExport = isFunction(module);
@@ -24,5 +24,5 @@ export async function moduleExecutor(module: any): Promise<void> {
     fn = module;
   }
 
-  await fn();
+  await fn(options);
 }

@@ -1,8 +1,10 @@
 import { logger } from "../logger";
+import { join, dirname } from "path";
+import { executeCodechecksFile } from "./execution";
 
 export async function executeCodechecksJson(
   path: string,
-  checkNameMapper: CheckNameMapper = standardNameMapper,
+  checkNameMapper: CheckNameMapper = standardNameMapper(path),
 ): Promise<void> {
   const json = loadJson(path);
   return executeCodechecksJsonString(json, checkNameMapper);
@@ -20,12 +22,9 @@ export async function executeCodechecksJsonString(
   for (const check of checks) {
     const moduleName = checkNameMapper(check.name);
 
-    logger.log(`Executing ${check.name} => ${moduleName}`);
-    const module = require(moduleName);
-    if (!module.default) {
-      throw new Error(`${moduleName} does not have default export`);
-    }
-    await module.default(check.options);
+    logger.debug(`Executing ${check.name} => ${moduleName}`);
+
+    await executeCodechecksFile(moduleName, check.options);
   }
 }
 
@@ -43,7 +42,7 @@ export type CheckNameMapper = (name: string) => string;
  *  1. Check if @codechecks/CHECK_NAME exists
  *  2. Check CHECK_NAME
  */
-export function standardNameMapper(checkName: string): string {
+export const standardNameMapper = (path: string) => (checkName: string): string => {
   if (checkIfModuleExists(`@codechecks/${checkName}`)) {
     return `@codechecks/${checkName}`;
   }
@@ -51,12 +50,15 @@ export function standardNameMapper(checkName: string): string {
   if (checkIfModuleExists(checkName)) {
     return checkName;
   }
+  if (checkIfModuleExists(join(dirname(path), checkName))) {
+    return join(dirname(path), checkName);
+  }
 
   throw new Error(`Module ${checkName} couldn't be found. Tried: 
 - @codechecks/${checkName}
 - ${checkName}
 `);
-}
+};
 
 function checkIfModuleExists(moduleName: string): boolean {
   try {
