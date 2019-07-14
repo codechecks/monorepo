@@ -12,6 +12,30 @@
   </p>
 </p>
 
+**CodeChecks.io** is a framework for code review automation. It allows writing plugins (codechecks) in **JavaScript**
+that:
+
+- execute directly on your **CI** (like CircleCI or TravisCI) and communicate with our backend
+- can inspect all **Pull Request** data (title, content, changed files etc.)
+- can attach feedback information back to **GitHub** as check (success/failure status, additional message)
+- can upload, retrieve and calculate difference between arbitrary **artifacts** (like JSON values describing build size
+  or screenshots of views of a frontend app)
+- require only one **GitHub App** — [Codechecks App](https://github.com/apps/codechecks) installed in order to work
+
+```typescript
+import { codechecks } from "@codechecks/client";
+
+export default async () => {
+  await codechecks.success({
+    name: "Hello world!",
+    shortDescription: "It's so easy!",
+  });
+};
+```
+
+Particular codechecks can be distributed as **npm** packages and can be setup in a declarative way in
+[`codechecks.yml`](https://github.com/codechecks/docs/blob/master/configuration.md#codechecksyml) file.
+
 ## Docs 📚
 
 - [Getting started guide](https://github.com/codechecks/docs/blob/master/getting-started.md)
