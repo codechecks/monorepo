@@ -33,6 +33,8 @@ export default async () => {
 };
 ```
 
+![](images/demo.gif)
+
 Particular codechecks can be distributed as **npm** packages and can be setup in a declarative way in
 [`codechecks.yml`](https://github.com/codechecks/docs/blob/master/configuration.md#codechecksyml) file.
 
