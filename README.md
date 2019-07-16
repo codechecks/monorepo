@@ -29,9 +29,12 @@ export default async () => {
   await codechecks.success({
     name: "Hello world!",
     shortDescription: "It's so easy!",
+    longDescription: "# Hello! 👋",
   });
 };
 ```
+
+![](images/demo.gif)
 
 Particular codechecks can be distributed as **npm** packages and can be setup in a declarative way in
 [`codechecks.yml`](https://github.com/codechecks/docs/blob/master/configuration.md#codechecksyml) file.
