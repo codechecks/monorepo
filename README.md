@@ -40,7 +40,7 @@ Particular codechecks can be distributed as **npm** packages and can be setup in
 [`codechecks.yml`](https://github.com/codechecks/docs/blob/master/configuration.md#codechecksyml) file.
 
 ## Docs 📚
-
+- [Awesome codechecks](https://github.com/codechecks/awesome-codechecks)
 - [Getting started guide](https://github.com/codechecks/docs/blob/master/getting-started.md)
 - [Full documentation](https://github.com/codechecks/docs)
 
