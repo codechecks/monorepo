@@ -32,7 +32,7 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
 
   const gitRoot = findRootGitRepository(process.cwd());
   if (!gitRoot) {
-    throw new Error("Couldn't find project root!");
+    throw new Error("Couldn't find git project root!");
   }
   const settings = await loadCodechecksSettings(gitRoot);
   const sharedExecutionCtx = await getConstExecutionContext(api, provider, settings, gitRoot);
