@@ -63,6 +63,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://twitter.com/krzkaczor"><img src="https://avatars2.githubusercontent.com/u/1814312?v=4" width="100px;" alt="Chris Kaczor"/><br /><sub><b>Chris Kaczor</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=krzkaczor" title="Code">💻</a> <a href="#ideas-krzkaczor" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/codechecks/monorepo/commits?author=krzkaczor" title="Documentation">📖</a> <a href="#business-krzkaczor" title="Business development">💼</a> <a href="#infra-krzkaczor" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     <td align="center"><a href="https://cgewecke.github.io/"><img src="https://avatars0.githubusercontent.com/u/7332026?v=4" width="100px;" alt="cgewecke"/><br /><sub><b>cgewecke</b></sub></a><br /><a href="#plugin-cgewecke" title="Plugin/utility libraries">🔌</a> <a href="#ideas-cgewecke" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/codechecks/monorepo/commits?author=cgewecke" title="Code">💻</a></td>
+    <td align="center"><a href="https://twitter.com/timocov_"><img src="https://avatars3.githubusercontent.com/u/3112183?v=4" width="100px;" alt="Evgeniy Timokhov"/><br /><sub><b>Evgeniy Timokhov</b></sub></a><br /><a href="#plugin-timocov" title="Plugin/utility libraries">🔌</a></td>
   </tr>
 </table>
 
