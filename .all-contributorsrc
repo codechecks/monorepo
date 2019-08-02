@@ -33,6 +33,15 @@
         "ideas",
         "code"
       ]
+    },
+    {
+      "login": "timocov",
+      "name": "Evgeniy Timokhov",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/3112183?v=4",
+      "profile": "https://twitter.com/timocov_",
+      "contributions": [
+        "plugin"
+      ]
     }
   ],
   "contributorsPerLine": 7
