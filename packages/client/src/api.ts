@@ -142,7 +142,11 @@ export class Api {
   public async getValue<T>(name: string, key: string, projectSlug?: string): Promise<T | undefined> {
     try {
       const res = await this.getFileAsString(`${key}/${name}.json`, projectSlug);
-      return JSON.parse(res || "").value;
+      if (!res) {
+        return undefined;
+      }
+
+      return JSON.parse(res).value;
     } catch (e) {
       if (e instanceof StatusCodeError && e.statusCode === 404) {
         return undefined;

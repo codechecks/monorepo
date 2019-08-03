@@ -147,13 +147,13 @@
     execa "1"
     nodegit "^0.24.3"
 
-"@codechecks/type-coverage-watcher@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@codechecks/type-coverage-watcher/-/type-coverage-watcher-0.1.1.tgz#bd16ef7698bf34190cf97e5489a60a0bd8259577"
-  integrity sha512-bgt/Tkf1EHyJ8rX78ieYxwQHSueBKizaOoHbsdt0iJ/7VI4WJ3JCVxWEu2OO8y//mQ9aDtQ+skMj3v2U+p/SVQ==
+"@codechecks/type-coverage-watcher@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@codechecks/type-coverage-watcher/-/type-coverage-watcher-0.1.2.tgz#f1520ff43d75f478da75271f41c00e23dae442ee"
+  integrity sha512-ptmoXDs+DIq2gr4y7xM/R/iwS9XPgbLnqriWcYC03tg0aE8iUzPunK+O6c2rb5+U244EIOwpxGn0LtLTque3ng==
   dependencies:
     lodash "^4.17.11"
-    type-coverage "^1.10.0"
+    type-coverage-core "^2.2.0"
 
 "@jest/console@^24.3.0":
   version "24.3.0"
@@ -2920,7 +2920,19 @@ glob-to-regexp@^0.3.0:
   resolved "https://registry.yarnpkg.com/glob-to-regexp/-/glob-to-regexp-0.3.0.tgz#8c5a1494d2066c570cc3bfe4496175acc4d502ab"
   integrity sha1-jFoUlNIGbFcMw7/kSWF1rMTVAqs=
 
-glob@7.1.3, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3:
+glob@7:
+  version "7.1.4"
+  resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.4.tgz#aa608a2f6c577ad357e1ae5a5c26d9a8d1969255"
+  integrity sha512-hkLPepehmnKk41pUGm3sYxoFs/umurYfYJCerbXEyFIWcAzvpipAgVkBqqT9RBKMGjnq6kMuyYwha6csxbiM1A==
+  dependencies:
+    fs.realpath "^1.0.0"
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "^3.0.4"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
+
+glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3:
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.3.tgz#3960832d3f1574108342dafd3a67b332c0969df1"
   integrity sha512-vcfuiIxogLV4DlGBHIUOwI0IbrJ8HWPc4MU7HzviGeNho/UJDfi6B5p3sHeWIQ0KGIU0Jpxi5ZHxemQfLkkAwQ==
@@ -4603,7 +4615,7 @@ mimic-fn@^1.0.0:
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-1.2.0.tgz#820c86a39334640e99516928bd03fca88057d022"
   integrity sha512-jf84uxzwiuiIVKiOLpfYk7N46TSy8ubTonmneY9vrpHNAnp0QBt2BxWV9dO3/j+BoVAb+a5G6YDPW3M5HOdMWQ==
 
-minimatch@^3.0.0, minimatch@^3.0.3, minimatch@^3.0.4:
+minimatch@3, minimatch@^3.0.0, minimatch@^3.0.3, minimatch@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   integrity sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
@@ -4623,7 +4635,7 @@ minimist@0.0.8:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
   integrity sha1-hX/Kv8M5fSYluCKCYuhqp6ARsF0=
 
-minimist@1.2.0, minimist@^1.1.1, minimist@^1.1.3, minimist@^1.2.0:
+minimist@^1.1.1, minimist@^1.1.3, minimist@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
   integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
@@ -6637,6 +6649,14 @@ ts-jest@^24.0.1:
     semver "^5.5"
     yargs-parser "10.x"
 
+ts-lib-utils@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/ts-lib-utils/-/ts-lib-utils-2.2.0.tgz#dbf198ba67e2fee027f36bd2f9c0cbd638ed1731"
+  integrity sha512-yfZWuQs5bfQA2RLJdHUOSL2+Iw4NcZ8eKglVVW25aXi3sdLEoJxHB3tC2CN+x4MY4X39tcFCGlE5V7IF8O3m8w==
+  dependencies:
+    glob "7"
+    tslib "1"
+
 ts-node@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-7.0.1.tgz#9562dc2d1e6d248d24bc55f773e3f614337d9baf"
@@ -6760,26 +6780,20 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
-type-coverage@^1.10.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/type-coverage/-/type-coverage-1.14.0.tgz#3cf20898f6eba7d1a0f77178131079b5143a3984"
-  integrity sha512-FbeXSyTsTNccxg3U+AdcpOakCRDivWWeBH30/2UDyMXsGH2cGowv9uYxii+d5r2wq68PzGJTtrOeUmNWcpxppA==
+type-coverage-core@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/type-coverage-core/-/type-coverage-core-2.2.0.tgz#436ebe4f1b7bfd36ab019c840147fbcbb4bd4f1f"
+  integrity sha512-b7NTFy8HSo57C0zvJK5Vy8K+KWmQEyCFvXE7E8I6VXtt6clHuDg8z4L+CfnSGtt1ZovDu2C6+qjmBgdTZHeJyw==
   dependencies:
-    glob "7.1.3"
-    minimist "1.2.0"
+    minimatch "3"
+    ts-lib-utils "^2.2.0"
     tslib "1"
     tsutils "3"
-    typescript "2 || 3"
 
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
-
-"typescript@2 || 3":
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.2.tgz#a09e1dc69bc9551cadf17dba10ee42cf55e5d56c"
-  integrity sha512-7KxJovlYhTX5RaRbUdkAXN1KUZ8PwWlTzQdHV6xNqvuFOs7+WBo10TQUqT19Q/Jz2hk5v9TQDIhyLhhJY4p5AA==
 
 typescript@^3.1.6:
   version "3.2.2"
