@@ -147,10 +147,10 @@
     execa "1"
     nodegit "^0.24.3"
 
-"@codechecks/type-coverage-watcher@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@codechecks/type-coverage-watcher/-/type-coverage-watcher-0.1.2.tgz#f1520ff43d75f478da75271f41c00e23dae442ee"
-  integrity sha512-ptmoXDs+DIq2gr4y7xM/R/iwS9XPgbLnqriWcYC03tg0aE8iUzPunK+O6c2rb5+U244EIOwpxGn0LtLTque3ng==
+"@codechecks/type-coverage-watcher@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@codechecks/type-coverage-watcher/-/type-coverage-watcher-0.1.3.tgz#5ce5d7599762d4c2c31e384eee16db1b70fdd0b2"
+  integrity sha512-1eeimISnvcTS1bV+OQI1Zt9ruj3+Ix5GGEMbs54S1flyIU1tKGGRNVBNqTmETCkQMfjcNb6T/T7S6o+L7O0pnQ==
   dependencies:
     lodash "^4.17.11"
     type-coverage-core "^2.2.0"
