@@ -74,7 +74,8 @@ export class LocalProvider implements CiProvider {
   }
 
   public supportsSpeculativeBranchSelection(): boolean {
-    return true;
+    // this can cause weird issues when there is no local git repository
+    return false;
   }
 }
 
