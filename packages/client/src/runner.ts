@@ -7,7 +7,7 @@ import * as program from "commander";
 import ms = require("ms");
 
 import { findProvider } from "./ci-providers";
-import { getExecutionContext, getConstExecutionContext } from "./getExecutionContext";
+import { getExecutionContext, getSharedExecutionContext } from "./getExecutionContext";
 import { Api, getApiOptions } from "./api";
 import { CodechecksClient } from "./client";
 import { normalizePath, Path, maskSecrets } from "./utils";
@@ -35,7 +35,7 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
     throw new Error("Couldn't find git project root!");
   }
   const settings = await loadCodechecksSettings(gitRoot);
-  const sharedExecutionCtx = await getConstExecutionContext(api, provider, settings, gitRoot);
+  const sharedExecutionCtx = await getSharedExecutionContext(api, provider, settings, gitRoot);
   logger.debug({ sharedExecutionCtx });
 
   (api as any).sharedCtx = sharedExecutionCtx;

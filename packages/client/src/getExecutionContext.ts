@@ -10,7 +10,7 @@ import { getPrInfoForSpeculativeBranch } from "./speculativeBranchSelection";
 /**
  * Better part of execution context stays the same for all codechecks files being executed so we just get it once.
  */
-export async function getConstExecutionContext(
+export async function getSharedExecutionContext(
   api: Api,
   ciProvider: CiProvider,
   settings: CodeChecksSettings,
