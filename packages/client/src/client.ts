@@ -23,18 +23,18 @@ export class CodechecksClient {
     }
   }
 
-  public async getValue<T>(name: string): Promise<T | undefined> {
+  public async getValue<T>(name: string, scope?: string): Promise<T | undefined> {
     if (!this.context.pr) {
       throw new NotPrError();
     }
-    return this.api.getValue<T>(name, this.context.pr.base.sha, this.getPublicProjectSlug());
+    return this.api.getValue<T>(name, scope || this.context.pr.base.sha, this.getPublicProjectSlug());
   }
 
-  public async saveValue(name: string, value: any): Promise<void> {
+  public async saveValue(name: string, value: any, scope?: string): Promise<void> {
     if (this.context.isLocalMode) {
       return;
     }
-    return this.api.saveValue(name, value, this.context.currentSha, this.getPublicProjectSlug());
+    return this.api.saveValue(name, value, scope || this.context.currentSha, this.getPublicProjectSlug());
   }
 
   public async getFile(name: string, destinationPath: string): Promise<void> {
