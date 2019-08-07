@@ -1,7 +1,7 @@
 import { PrInfo, FileStatuses } from "./api";
 import { CodeChecksSettings } from "./types";
 import { logger } from "./logger";
-import execa = require("execa");
+import { getHeadCommit, run } from "./utils/git";
 
 const diffParser = require("./js/diff-parser/diff-parser.js").DiffParser;
 
@@ -40,10 +40,6 @@ export async function getPrInfoForSpeculativeBranch(
   // @todo implement
 }
 
-async function getHeadCommit(repoPath: string): Promise<string> {
-  return await run(repoPath, "git rev-parse HEAD");
-}
-
 async function getBaseCommit(repoPath: string, speculativeBranchesInOrder: string[]): Promise<string | undefined> {
   const headBranch = await run(repoPath, `git rev-parse --abbrev-ref HEAD`);
   const baseBranchName = findSpeculativeBaseBranch(headBranch, speculativeBranchesInOrder);
@@ -59,8 +55,7 @@ async function getBaseCommit(repoPath: string, speculativeBranchesInOrder: strin
     } catch (e) {
       logger.debug(e);
       logger.debug(`Failed to access origin/${baseBranchName}. Trying with: ${baseBranchName}`);
-      const { stdout: sha } = await execa(`git rev-parse ${baseBranchName}`, { shell: true, cwd: repoPath });
-      return sha;
+      return await run(repoPath, `git rev-parse ${baseBranchName}`);
     }
   }
 }
@@ -104,10 +99,4 @@ async function getFileStatuses(repo: string, baseCommit: string, headCommit: str
     added,
     removed,
   };
-}
-
-export async function run(cwd: string, cmd: string): Promise<string> {
-  const { stdout } = await execa(cmd, { shell: true, cwd });
-
-  return stdout;
 }

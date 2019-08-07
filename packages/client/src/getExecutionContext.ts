@@ -6,6 +6,7 @@ import { dirname } from "path";
 import { LocalProvider } from "./ci-providers/Local";
 import { CodeChecksSettings } from "./types";
 import { getPrInfoForSpeculativeBranch } from "./speculativeBranchSelection";
+import { getBranchName } from "./utils/git";
 
 /**
  * Better part of execution context stays the same for all codechecks files being executed so we just get it once.
@@ -17,6 +18,7 @@ export async function getSharedExecutionContext(
   gitRepoRootPath: string,
 ): Promise<SharedExecutionContext> {
   const currentSha = await ciProvider.getCurrentSha();
+  const currentBranchName = (await getBranchName(gitRepoRootPath)) || "master";
   const isFork = await ciProvider.isFork();
   const pr = await ciProvider.getPullRequestID();
   const projectSlug = await ciProvider.getProjectSlug();
@@ -76,6 +78,7 @@ export async function getSharedExecutionContext(
         supportsPages: projectInfo.artifactsProxySupportsPages,
       },
       currentSha,
+      currentBranchName,
       isLocalMode: localMode,
       pr: prInfo,
       isFork,
@@ -91,6 +94,7 @@ export async function getSharedExecutionContext(
         supportsPages: projectInfo.artifactsProxySupportsPages,
       },
       currentSha,
+      currentBranchName,
       isLocalMode: localMode,
       isFork,
       isSpeculativePr: false,
@@ -131,6 +135,7 @@ export interface SharedExecutionContext {
   };
   isPrivate: boolean;
   currentSha: string;
+  currentBranchName: string;
   isPr: boolean;
   pr?: PrInfo;
   isLocalMode?: {
