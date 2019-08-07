@@ -24,6 +24,8 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
   const startTime = new Date().getTime();
 
   const provider = findProvider(process.env, project);
+  logger.debug(`Found CI provider: ${provider.name}`)
+
   const requiresSecret = checkIfIsLocalMode(provider) || (await provider.isFork());
   const api = new Api(getApiOptions(requiresSecret));
   if ((provider as any).setApi) {

@@ -3,6 +3,8 @@ import { Env, CiProvider } from "./types";
 export class Circle implements CiProvider {
   constructor(private readonly env: Env) {}
 
+  public name = "Circle";
+
   isCurrentlyRunning(): boolean {
     return this.env["CIRCLECI"] === "true";
   }

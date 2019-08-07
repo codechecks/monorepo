@@ -11,6 +11,8 @@ const REMOTE_URL_REGEXP = /^git\@github\.com\:(.*)\.git$/;
 export class LocalProvider implements CiProvider {
   constructor(private readonly env: Env, private readonly forcedLocalProjectSlug?: string) {}
 
+  public name = "Local";
+
   isCurrentlyRunning(): boolean {
     const isCI = this.env["CI"];
 

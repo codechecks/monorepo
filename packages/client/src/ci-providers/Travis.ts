@@ -3,6 +3,8 @@ import { Env, CiProvider } from "./types";
 export class Travis implements CiProvider {
   constructor(private readonly env: Env) {}
 
+  public name = "Travis";
+
   isCurrentlyRunning(): boolean {
     return this.env["TRAVIS"] === "true";
   }
