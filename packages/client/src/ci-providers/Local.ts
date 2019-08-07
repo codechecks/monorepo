@@ -57,10 +57,12 @@ export class LocalProvider implements CiProvider {
       },
       head: {
         sha: await this.getCurrentSha(),
+        branchName: "feature-branch",
       },
       base: {
         // @todo we should have heuristics to detect "main" branch, sometimes it's dev
         sha: await this.getShaForRef("master"),
+        branchName: "master",
       },
     };
   }

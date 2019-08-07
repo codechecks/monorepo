@@ -384,9 +384,11 @@ export interface PrInfo {
   };
   head: {
     sha: string;
+    branchName: string;
   };
   base: {
     sha: string;
+    branchName: string;
   };
   files: FileStatuses;
 }

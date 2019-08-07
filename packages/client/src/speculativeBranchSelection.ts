@@ -36,7 +36,8 @@ export async function getPrInfoForSpeculativeBranch(
       sha: baseCommit,
     },
     files: fileStatuses,
-  };
+  } as any;
+  // @todo implement
 }
 
 async function getHeadCommit(repoPath: string): Promise<string> {
