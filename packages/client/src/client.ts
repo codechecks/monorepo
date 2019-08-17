@@ -24,10 +24,10 @@ export class CodechecksClient {
   }
 
   public async getValue<T>(name: string, scope?: string): Promise<T | undefined> {
-    if (!this.context.pr) {
+    if (!this.context.pr && !scope) {
       throw new NotPrError();
     }
-    return this.api.getValue<T>(name, scope || this.context.pr.base.sha, this.getPublicProjectSlug());
+    return this.api.getValue<T>(name, scope || this.context.pr!.base.sha, this.getPublicProjectSlug());
   }
 
   public async saveValue(name: string, value: any, scope?: string): Promise<void> {
