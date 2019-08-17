@@ -3,8 +3,6 @@ import * as execa from "execa";
 import { PrInfo } from "../api";
 import { CodeChecksReport } from "../types";
 
-const REMOTE_URL_REGEXP = /^git\@github\.com\:(.*)\.git$/;
-
 /**
  * Run codechecks locally, not on CI. It requires running within git reposistory.
  */
@@ -29,13 +27,7 @@ export class LocalProvider implements CiProvider {
 
     const rawRemoteUrl = (await execa.shell("git config --get remote.origin.url")).stdout.trim();
 
-    const matches = REMOTE_URL_REGEXP.exec(rawRemoteUrl);
-    if (!matches || !matches[1]) {
-      throw new Error(`Can't get project slug from ${rawRemoteUrl}`);
-    }
-    const projectSlug = matches[1];
-
-    return projectSlug;
+    return fullNameFromRemoteUrl(rawRemoteUrl);
   }
 
   getPullRequestID(): number {
@@ -86,6 +78,7 @@ import * as marked from "marked";
 import * as TerminalRenderer from "marked-terminal";
 import { logger } from "../logger";
 import chalk from "chalk";
+import { fullNameFromRemoteUrl } from "../utils/git";
 
 marked.setOptions({
   // Define custom renderer
@@ -95,14 +88,14 @@ marked.setOptions({
 export function printCheck(report: CodeChecksReport): void {
   console.log(
     marked(`
-# ${report.status === "success" ? "✅" : "❌"} ${report.name} 
+# ${report.status === "success" ? "✅" : "❌"} ${report.name}
 ${report.shortDescription}`),
   );
 
   if (report.longDescription) {
     console.log(
       marked(`
-## Long description: 
+## Long description:
 ${report.longDescription}`),
     );
   }
