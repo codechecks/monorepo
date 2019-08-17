@@ -42,18 +42,18 @@ describe("utils > git", () => {
   });
 
   describe("fullNameFromRemoteUrl", () => {
-    it("should returns repository full name from ssh url", () => {
+    it("should return repository full name from ssh url", () => {
       expect(fullNameFromRemoteUrl("git@github.com:codechecks/monorepo.git")).toEqual("codechecks/monorepo");
       expect(fullNameFromRemoteUrl("git@github.com:codechecks/awesome-codechecks.git")).toEqual("codechecks/awesome-codechecks");
       expect(fullNameFromRemoteUrl("git@github.com:MikeMcl/bignumber.js.git")).toEqual("MikeMcl/bignumber.js");
     });
 
-    it("should returns repository full name from clone url", () => {
+    it("should return repository full name from clone url", () => {
       expect(fullNameFromRemoteUrl("https://github.com/codechecks/monorepo.git")).toEqual("codechecks/monorepo");
       expect(fullNameFromRemoteUrl("http://github.com/codechecks/monorepo.git")).toEqual("codechecks/monorepo");
     });
 
-    it("should returns repository full name from svn url", () => {
+    it("should return repository full name from svn url", () => {
       expect(fullNameFromRemoteUrl("https://github.com/codechecks/monorepo")).toEqual("codechecks/monorepo");
       expect(fullNameFromRemoteUrl("http://github.com/codechecks/monorepo")).toEqual("codechecks/monorepo");
     });
