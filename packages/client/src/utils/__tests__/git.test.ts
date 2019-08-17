@@ -44,7 +44,9 @@ describe("utils > git", () => {
   describe("fullNameFromRemoteUrl", () => {
     it("should return repository full name from ssh url", () => {
       expect(fullNameFromRemoteUrl("git@github.com:codechecks/monorepo.git")).toEqual("codechecks/monorepo");
-      expect(fullNameFromRemoteUrl("git@github.com:codechecks/awesome-codechecks.git")).toEqual("codechecks/awesome-codechecks");
+      expect(fullNameFromRemoteUrl("git@github.com:codechecks/awesome-codechecks.git")).toEqual(
+        "codechecks/awesome-codechecks",
+      );
       expect(fullNameFromRemoteUrl("git@github.com:MikeMcl/bignumber.js.git")).toEqual("MikeMcl/bignumber.js");
     });
 
@@ -59,7 +61,9 @@ describe("utils > git", () => {
     });
 
     it("should throw on unmatched url", () => {
-      expect(() => fullNameFromRemoteUrl("github.com/codechecks/monorepo")).toThrowError("Can't get project slug from github.com/codechecks/monorepo")
+      expect(() => fullNameFromRemoteUrl("github.com/codechecks/monorepo")).toThrowError(
+        "Can't get project slug from github.com/codechecks/monorepo",
+      );
     });
   });
 });
