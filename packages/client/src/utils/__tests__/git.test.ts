@@ -1,6 +1,6 @@
 import * as mockFS from "mock-fs";
 import { join } from "path";
-import { findRootGitRepository } from "./git";
+import { findRootGitRepository } from "../git";
 
 const rootVirtualPath = "/app";
 

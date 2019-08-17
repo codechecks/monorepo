@@ -1,6 +1,6 @@
 import * as mockFS from "mock-fs";
 import { join } from "path";
-import { loadCodechecksSettings } from "./settings";
+import { loadCodechecksSettings } from "../settings";
 
 const rootVirtualPath = "/app/";
 
