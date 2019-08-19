@@ -1,5 +1,5 @@
 checks:
-  - name: type-coverage-watcher
+  - name: typecov
 
   - name: ban-deps-codecheck
     options:
