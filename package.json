@@ -19,7 +19,6 @@
     "prepublishOnly": "yarn test && yarn build"
   },
   "devDependencies": {
-    "@codechecks/type-coverage-watcher": "^0.1.3",
     "@types/dotenv": "^6.1.0",
     "@types/jest": "^24.0.11",
     "dotenv": "^6.2.0",
@@ -37,5 +36,8 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "typecov": "^0.2.1"
+  }
 }
