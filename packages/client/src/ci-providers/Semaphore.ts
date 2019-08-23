@@ -1,6 +1,6 @@
 import { Env, CiProvider } from "./types";
 
-export class Semaphore2 implements CiProvider {
+export class Semaphore implements CiProvider {
   constructor(private readonly env: Env) {}
 
   isCurrentlyRunning(): boolean {
