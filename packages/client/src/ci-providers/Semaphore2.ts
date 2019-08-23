@@ -17,7 +17,7 @@ export class Semaphore2 implements CiProvider {
     if (idInt == null) {
       return undefined;
     }
-    
+
     return idInt;
   }
 
