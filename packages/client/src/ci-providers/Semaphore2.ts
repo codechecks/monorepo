@@ -12,7 +12,13 @@ export class Semaphore2 implements CiProvider {
       return undefined;
     }
 
-    return this.env.SEMAPHORE_GIT_BRANCH.substr(13);
+    const id = this.env.SEMAPHORE_GIT_BRANCH.substr(13);
+    const idInt = parseInt(id);
+    if (idInt == null) {
+      return undefined;
+    }
+    
+    return idInt;
   }
 
   getCurrentSha(): string {
