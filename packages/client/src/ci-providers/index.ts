@@ -1,14 +1,14 @@
 import { Circle } from "./Circle";
 import { Travis } from "./Travis";
+import { Semaphore } from "./Semaphore";
 import { CiProvider, Env } from "./types";
 import { LocalProvider } from "./Local";
-import { Semaphore2 } from "./Semaphore2";
 import { BuildKite } from "./BuildKite";
 
 const providers: { new (env: Env, localProject?: string): CiProvider }[] = [
   Circle,
   Travis,
-  Semaphore2,
+  Semaphore,
   BuildKite,
   LocalProvider,
 ];
