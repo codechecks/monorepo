@@ -15,14 +15,6 @@ blocks:
             - cache restore
             - yarn install --frozen-lockfile
             - cache store
-
-  - name: Tests
-    task:
-      prologue:
-        commands:
-          - checkout
-          - cache restore
-      jobs:
-        - name: Everything
+        - name: codechecks
           commands:
             - ./packages/client/dist/runner.js ./checks/semaphore.ts
