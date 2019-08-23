@@ -6,8 +6,10 @@ agent:
     os_image: ubuntu1804
 
 blocks:
-  - name: Install dependencies
+  - name: Run
     task:
+      secrets:
+        - name: CC_SECRET
       jobs:
         - name: yarn install and cache
           commands:
