@@ -1,0 +1,28 @@
+version: v1.0
+name: First pipeline example
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Install dependencies
+    task:
+      jobs:
+        - name: yarn install and cache
+          commands:
+            - checkout
+            - cache restore
+            - yarn install --frozen-lockfile
+            - cache store
+
+  - name: Tests
+    task:
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+      jobs:
+        - name: Everything
+          commands:
+            - ./packages/client/dist/runner.js ./checks/semaphore.ts
