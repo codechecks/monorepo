@@ -17,4 +17,5 @@ blocks:
             - cache store
         - name: codechecks
           commands:
+            - yarn build
             - ./packages/client/dist/runner.js ./checks/semaphore.ts
