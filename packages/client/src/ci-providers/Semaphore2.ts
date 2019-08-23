@@ -33,12 +33,12 @@ export class Semaphore2 implements CiProvider {
   }
 
   public getProjectSlug(): string {
-    const slug = this.env["SEMAPHORE_GIT_REPO_SLUG"];
+    const slug = this.env["SEMAPHORE_PROJECT_NAME"];
     if (!slug) {
       throw new Error("Couldnt get repo slug");
     }
 
-    return slug;
+    return `${this.env["SEMAPHORE_PROJECT_NAME"]}/${this.env["SEMAPHORE_GIT_DIR"]}`;
   }
 
   public supportsSpeculativeBranchSelection(): boolean {
