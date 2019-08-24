@@ -4,7 +4,9 @@ export function parseRepositorySlug(repoUrl: string): string {
   const GIT_URL_REGEX = /^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+).git$/
   const repoMatch = repoUrl.match(GIT_URL_REGEX);
 
-  if(!repoMatch) return "";
+  if(!repoMatch) {
+    throw new Error(`Couldnt parse repository slug from ${repoUrl}`);
+  }
   return `${repoMatch[4]}/${repoMatch[5]}`;
 }
 
