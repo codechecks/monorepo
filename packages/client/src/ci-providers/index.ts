@@ -1,10 +1,17 @@
 import { Circle } from "./Circle";
 import { Travis } from "./Travis";
-import { Semaphore2 } from "./Semaphore2";
 import { CiProvider, Env } from "./types";
 import { LocalProvider } from "./Local";
+import { Semaphore2 } from "./Semaphore2";
+import { BuildKite } from "./BuildKite";
 
-const providers: { new (env: Env, localProject?: string): CiProvider }[] = [Circle, Travis, Semaphore2, LocalProvider];
+const providers: { new (env: Env, localProject?: string): CiProvider }[] = [
+  Circle,
+  Travis,
+  Semaphore2,
+  BuildKite,
+  LocalProvider,
+];
 
 // @todo refactor passing CLI options
 export function findProvider(env: Env, localProject?: string): CiProvider {
