@@ -42,10 +42,14 @@ export class BuildKite implements CiProvider {
     }
     const buildKitePullRequestRepo = this.env["BUILDKITE_PULL_REQUEST_REPO"] || "";
     const buildKiteRepo = this.env["BUILDKITE_REPO"] || "";
-    const prSlug = parseRepositorySlug(buildKitePullRequestRepo);
-    const repoSlug = parseRepositorySlug(buildKiteRepo);
-
-    return prSlug !== repoSlug;
+    try {
+      const prSlug = parseRepositorySlug(buildKitePullRequestRepo);
+      const repoSlug = parseRepositorySlug(buildKiteRepo);
+      
+      return prSlug !== repoSlug;
+    } catch {
+      return false;
+    }
   }
 
   public getProjectSlug(): string {
