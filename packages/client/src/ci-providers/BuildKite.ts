@@ -1,10 +1,10 @@
 import { Env, CiProvider } from "./types";
 
 export function parseRepositorySlug(repoUrl: string): string {
-  const GIT_URL_REGEX = /^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+).git$/
+  const GIT_URL_REGEX = /^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+).git$/;
   const repoMatch = repoUrl.match(GIT_URL_REGEX);
 
-  if(!repoMatch) {
+  if (!repoMatch) {
     throw new Error(`Couldnt parse repository slug from ${repoUrl}`);
   }
   return `${repoMatch[4]}/${repoMatch[5]}`;
@@ -45,7 +45,7 @@ export class BuildKite implements CiProvider {
     try {
       const prSlug = parseRepositorySlug(buildKitePullRequestRepo);
       const repoSlug = parseRepositorySlug(buildKiteRepo);
-      
+
       return prSlug !== repoSlug;
     } catch {
       return false;

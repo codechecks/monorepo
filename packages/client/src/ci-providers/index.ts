@@ -1,6 +1,6 @@
 import { Circle } from "./Circle";
 import { Travis } from "./Travis";
-import { BuildKite } from './BuildKite';
+import { BuildKite } from "./BuildKite";
 import { CiProvider, Env } from "./types";
 import { LocalProvider } from "./Local";
 

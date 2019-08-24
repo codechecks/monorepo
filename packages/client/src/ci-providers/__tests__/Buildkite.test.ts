@@ -60,4 +60,4 @@ describe("parseRepositorySlug", () => {
   it("should parse basic slug from repository that is not a GitHub URL", () => {
     expect(parseRepositorySlug("https://gitlab.com/user/repo.git")).toEqual("user/repo");
   });
-})
+});
