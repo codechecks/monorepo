@@ -17,8 +17,10 @@ import { checkIfIsLocalMode } from "./ci-providers/Local";
 import { logger, printLogo, bold, formatSHA, formatPath } from "./logger";
 import { loadCodechecksSettings } from "./file-handling/settings";
 import { findRootGitRepository } from "./utils/git";
+import { CodeChecksClientArgs } from "./types";
 
-async function main(project?: string, codecheckFiles: Path[] = findCodechecksFiles(process.cwd())): Promise<void> {
+async function main(args: CodeChecksClientArgs, codecheckFiles: Path[] = findCodechecksFiles(process.cwd())): Promise<void> {
+  const { project } = args;
   printLogo();
   logger.log(`Executing ${bold(codecheckFiles.length)} codechecks files`);
   const startTime = new Date().getTime();
@@ -35,7 +37,7 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
     throw new Error("Couldn't find git project root!");
   }
   const settings = await loadCodechecksSettings(gitRoot);
-  const sharedExecutionCtx = await getConstExecutionContext(api, provider, settings, gitRoot);
+  const sharedExecutionCtx = await getConstExecutionContext(api, provider, settings, gitRoot, args);
   logger.debug({ sharedExecutionCtx });
 
   (api as any).sharedCtx = sharedExecutionCtx;
@@ -72,11 +74,17 @@ async function main(project?: string, codecheckFiles: Path[] = findCodechecksFil
 
 const command = program
   .version(require("../package.json").version)
-  .option("-p, --project [projectSlug]", "Project slug, useful only in local mode, otherwise ignored")
+  .option("-p, --project [projectSlug]", "Project slug, works only in local mode")
+  .option("--fail-fast", "Stops running checks after the first failure, works only in local mode")
   .usage("codechecks [codechecks.yml|json|ts|js]")
   .parse(process.argv);
 
-main(command.project, command.args.length > 0 ? command.args.map(a => normalizePath(a)) : undefined).catch(e => {
+const args: CodeChecksClientArgs = {
+  project: command.project,
+  failFast: command.failFast,
+};
+
+main(args, command.args.length > 0 ? command.args.map(a => normalizePath(a)) : undefined).catch(e => {
   // we want informative output but we don't want leaking secrets into any logs
   logger.error(maskSecrets(e.message, process.env));
   logger.debug(maskSecrets(inspect(e), process.env));
