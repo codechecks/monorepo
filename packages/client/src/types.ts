@@ -18,3 +18,8 @@ export interface CodeChecksSettings {
   speculativeBranchSelection: boolean;
   branches: string[];
 }
+
+export interface CodeChecksClientArgs {
+  project?: string;
+  failFast?: boolean;
+}
