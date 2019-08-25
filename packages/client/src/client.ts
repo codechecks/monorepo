@@ -2,7 +2,7 @@ import { Api } from "./api";
 import { ExecutionContext } from "./getExecutionContext";
 import { CodeChecksReport, CodeChecksReportBody } from "./types";
 import { join } from "path";
-import { printCheck } from "./ci-providers/Local";
+import { processReport } from "./ci-providers/Local";
 const urlJoin = require("url-join") as (...args: string[]) => string;
 
 export class NotPrError extends Error {
@@ -68,7 +68,7 @@ export class CodechecksClient {
 
   public async report(report: CodeChecksReport): Promise<void> {
     if (this.context.isLocalMode) {
-      return printCheck(report);
+      return processReport(report, this.context);
     } else {
       return this.api.makeCommitCheck(
         this.context.currentSha,

@@ -41,6 +41,11 @@ class Logger {
   error(...args: any[]): void {
     console.error(chalk.red("Error occured: "), ...args);
   }
+
+  critical(...args: any[]): void {
+    console.error(chalk.red("Critical error occured: "), ...args);
+    process.exit(1);
+  }
 }
 
 export const logger = new Logger();
