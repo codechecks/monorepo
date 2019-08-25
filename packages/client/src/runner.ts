@@ -19,7 +19,10 @@ import { loadCodechecksSettings } from "./file-handling/settings";
 import { findRootGitRepository } from "./utils/git";
 import { CodeChecksClientArgs } from "./types";
 
-async function main(args: CodeChecksClientArgs, codecheckFiles: Path[] = findCodechecksFiles(process.cwd())): Promise<void> {
+async function main(
+  args: CodeChecksClientArgs,
+  codecheckFiles: Path[] = findCodechecksFiles(process.cwd()),
+): Promise<void> {
   const { project } = args;
   printLogo();
   logger.log(`Executing ${bold(codecheckFiles.length)} codechecks files`);
