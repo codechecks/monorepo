@@ -8,17 +8,7 @@ export class Semaphore implements CiProvider {
   }
 
   getPullRequestID(): number | undefined {
-    if (!this.env["SEMAPHORE_GIT_BRANCH"]) {
-      return undefined;
-    }
-
-    const id = this.env.SEMAPHORE_GIT_BRANCH.substr(13);
-    const idInt = parseInt(id);
-    if (idInt == null) {
-      return undefined;
-    }
-
-    return idInt;
+    return undefined;
   }
 
   getCurrentSha(): string {
