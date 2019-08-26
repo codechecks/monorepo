@@ -1,7 +1,13 @@
-import { CiProvider, Env } from "./types";
+import chalk from "chalk";
 import * as execa from "execa";
+import * as marked from "marked";
+import * as TerminalRenderer from "marked-terminal";
 import { PrInfo } from "../api";
+import { ExecutionContext } from "../getExecutionContext";
+import { logger } from "../logger";
 import { CodeChecksReport } from "../types";
+import { fullNameFromRemoteUrl } from "../utils/git";
+import { CiProvider, Env } from "./types";
 
 /**
  * Run codechecks locally, not on CI. It requires running within git reposistory.
@@ -74,26 +80,20 @@ export function checkIfIsLocalMode(provider: CiProvider): boolean {
   return provider instanceof LocalProvider;
 }
 
-import * as marked from "marked";
-import * as TerminalRenderer from "marked-terminal";
-import { logger } from "../logger";
-import chalk from "chalk";
-import { fullNameFromRemoteUrl } from "../utils/git";
-
 marked.setOptions({
   // Define custom renderer
   renderer: new TerminalRenderer(),
 });
 
-export function printCheck(report: CodeChecksReport): void {
-  console.log(
+function printCheck(report: CodeChecksReport): void {
+  logger.log(
     marked(`
 # ${report.status === "success" ? "✅" : "❌"} ${report.name}
 ${report.shortDescription}`),
   );
 
   if (report.longDescription) {
-    console.log(
+    logger.log(
       marked(`
 ## Long description:
 ${report.longDescription}`),
@@ -102,4 +102,15 @@ ${report.longDescription}`),
 
   logger.log(chalk.dim("---------------"));
   logger.log();
+}
+
+export function processReport(report: CodeChecksReport, context: ExecutionContext): void {
+  printCheck(report);
+
+  const isFailure = report.status === "failure";
+  const { isLocalMode } = context;
+  const shouldInterrupt = isFailure && isLocalMode && isLocalMode.isFailFast;
+  if (shouldInterrupt) {
+    logger.critical(`"${report.name}" check failed in fail fast mode`);
+  }
 }

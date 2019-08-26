@@ -4,7 +4,7 @@ import { DeepReadonly } from "ts-essentials";
 import { Path } from "./utils";
 import { dirname } from "path";
 import { LocalProvider } from "./ci-providers/Local";
-import { CodeChecksSettings } from "./types";
+import { CodeChecksSettings, CodeChecksClientArgs } from "./types";
 import { getPrInfoForSpeculativeBranch } from "./speculativeBranchSelection";
 
 /**
@@ -15,6 +15,7 @@ export async function getConstExecutionContext(
   ciProvider: CiProvider,
   settings: CodeChecksSettings,
   gitRepoRootPath: string,
+  args: CodeChecksClientArgs,
 ): Promise<SharedExecutionContext> {
   const currentSha = await ciProvider.getCurrentSha();
   const isFork = await ciProvider.isFork();
@@ -45,6 +46,7 @@ export async function getConstExecutionContext(
     localMode = {
       projectSlug,
       isOffline,
+      isFailFast: !!args.failFast,
     };
     prInfo = await ciProvider.getPrInfo();
   } else if (isFork) {
@@ -136,6 +138,7 @@ export interface SharedExecutionContext {
   isLocalMode?: {
     projectSlug: string;
     isOffline: boolean;
+    isFailFast: boolean;
   };
   isFork: boolean;
   isSpeculativePr: boolean;
