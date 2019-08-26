@@ -19,3 +19,5 @@ blocks:
             - cache store
             - yarn build
             - ./packages/client/dist/runner.js ./checks/semaphore.ts
+
+            
