@@ -51,6 +51,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "craigthompsonhive",
+      "name": "Craig Thompson",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/46025159?v=4",
+      "profile": "http://craigsworks.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ziolekjj",
+      "name": "Jakub Ziółkowski",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/11246666?v=4",
+      "profile": "https://github.com/ziolekjj",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
