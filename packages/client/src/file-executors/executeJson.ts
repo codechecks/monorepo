@@ -54,7 +54,7 @@ export const standardNameMapper = (path: string) => (checkName: string): string 
     return join(dirname(path), checkName);
   }
 
-  throw new Error(`Module ${checkName} couldn't be found. Tried: 
+  throw new Error(`Module ${checkName} couldn't be found. Tried:
 - @codechecks/${checkName}
 - ${checkName}
 `);
@@ -64,7 +64,7 @@ function checkIfModuleExists(moduleName: string): boolean {
   try {
     require.resolve(moduleName);
     return true;
-  } catch (e) {
+  } catch {
     return false;
   }
 }
