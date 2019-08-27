@@ -4,8 +4,9 @@ import { readEnvFile } from "./utils";
 import { BuildKite, parseRepositorySlug } from "../BuildKite";
 
 describe("Buildkite", () => {
-  const env = readEnvFile(join(__dirname, "__fixtures__", ".buildkiteci.env"));
-  const envFork = readEnvFile(join(__dirname, "__fixtures__", ".buildkiteci-fork.env"));
+  const env = readEnvFile(join(__dirname, "__fixtures__", "build-kite/pr.env"));
+  const envFork = readEnvFile(join(__dirname, "__fixtures__", "build-kite/fork.env"));
+  const envNoPR = readEnvFile(join(__dirname, "__fixtures__", "build-kite/nopr.env"));
 
   it("should detect buildkiteci", () => {
     const provider = new BuildKite(env);
@@ -26,8 +27,7 @@ describe("Buildkite", () => {
   });
 
   it("should not get pull request id if not running in PR context", () => {
-    const env = readEnvFile(join(__dirname, "__fixtures__", ".buildkiteci-nopr.env"));
-    const provider = new BuildKite(env);
+    const provider = new BuildKite(envNoPR);
 
     expect(provider.getPullRequestID()).toBe(undefined);
   });

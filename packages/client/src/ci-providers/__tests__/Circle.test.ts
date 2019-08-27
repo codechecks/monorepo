@@ -4,8 +4,9 @@ import { readEnvFile } from "./utils";
 import { Circle } from "../Circle";
 
 describe("Circle", () => {
-  const env = readEnvFile(join(__dirname, "__fixtures__", ".circleci.env"));
-  const envFork = readEnvFile(join(__dirname, "__fixtures__", ".circleci-fork.env"));
+  const env = readEnvFile(join(__dirname, "__fixtures__", "circle/pr.env"));
+  const envFork = readEnvFile(join(__dirname, "__fixtures__", "circle/fork.env"));
+  const envNoPR = readEnvFile(join(__dirname, "__fixtures__", "circle/nopr.env"));
 
   it("should detect circleci", () => {
     const provider = new Circle(env);
@@ -26,8 +27,7 @@ describe("Circle", () => {
   });
 
   it("should not get pull request id if not running in PR context", () => {
-    const env = readEnvFile(join(__dirname, "__fixtures__", ".circleci-nopr.env"));
-    const provider = new Circle(env);
+    const provider = new Circle(envNoPR);
 
     expect(provider.getPullRequestID()).toBeUndefined();
   });

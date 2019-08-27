@@ -4,7 +4,7 @@ import { readEnvFile } from "./utils";
 import { Semaphore } from "../Semaphore";
 
 describe("Semaphore", () => {
-  const env = readEnvFile(join(__dirname, "__fixtures__", "/semaphore/.semaphore-nopr.env"));
+  const env = readEnvFile(join(__dirname, "__fixtures__", "/semaphore/nopr.env"));
 
   it("should detect Semaphoreci", () => {
     const provider = new Semaphore(env);
