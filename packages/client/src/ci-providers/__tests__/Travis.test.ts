@@ -4,8 +4,9 @@ import { readEnvFile } from "./utils";
 import { Travis } from "../Travis";
 
 describe("Travis", () => {
-  const env = readEnvFile(join(__dirname, "__fixtures__", ".travisci.env"));
-  const envFork = readEnvFile(join(__dirname, "__fixtures__", ".travisci-fork.env"));
+  const env = readEnvFile(join(__dirname, "__fixtures__", "travis/pr.env"));
+  const envFork = readEnvFile(join(__dirname, "__fixtures__", "travis/fork.env"));
+  const envNoPR = readEnvFile(join(__dirname, "__fixtures__", "travis/nopr.env"));
 
   it("should detect travisci", () => {
     const provider = new Travis(env);
@@ -26,8 +27,7 @@ describe("Travis", () => {
   });
 
   it("should not get pull request id if not running in PR context", () => {
-    const env = readEnvFile(join(__dirname, "__fixtures__", ".travisci-nopr.env"));
-    const provider = new Travis(env);
+    const provider = new Travis(envNoPR);
 
     expect(provider.getPullRequestID()).toBe(undefined);
   });
