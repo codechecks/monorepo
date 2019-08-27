@@ -1,6 +1,6 @@
 import { Env, CiProvider } from "./types";
 
-export class Semaphore2 implements CiProvider {
+export class Semaphore implements CiProvider {
   constructor(private readonly env: Env) {}
 
   isCurrentlyRunning(): boolean {
@@ -8,17 +8,7 @@ export class Semaphore2 implements CiProvider {
   }
 
   getPullRequestID(): number | undefined {
-    if (!this.env["SEMAPHORE_GIT_BRANCH"]) {
-      return undefined;
-    }
-
-    const id = this.env.SEMAPHORE_GIT_BRANCH.substr(13);
-    const idInt = parseInt(id);
-    if (idInt == null) {
-      return undefined;
-    }
-
-    return idInt;
+    return undefined;
   }
 
   getCurrentSha(): string {
