@@ -14,7 +14,7 @@ import { normalizePath, Path, maskSecrets } from "./utils";
 import { executeCodechecksFile, findCodechecksFiles } from "./file-executors/execution";
 import { codechecks as globalClient } from ".";
 import { checkIfIsLocalMode } from "./ci-providers/Local";
-import { logger, printLogo, bold, formatSHA, formatPath } from "./logger";
+import { logger, printLogo, bold, red, green, formatSHA, formatPath } from "./logger";
 import { loadCodechecksSettings } from "./file-handling/settings";
 import { findRootGitRepository } from "./utils/git";
 import { CodeChecksClientArgs } from "./types";
@@ -56,6 +56,9 @@ async function main(
   }
   console.log();
 
+  let successCodechecks = 0;
+  let failureCodechecks = 0;
+
   for (const codecheckFile of codecheckFiles) {
     logger.log(`Executing ${bold(formatPath(codecheckFile, gitRoot))}...`);
     logger.log();
@@ -67,12 +70,26 @@ async function main(
     (global as any).__codechecks_client = _client;
 
     await executeCodechecksFile(codecheckFile);
+
+    successCodechecks += _client.countSuccesses();
+    failureCodechecks += _client.countFailures();
   }
 
   const finishTime = new Date().getTime();
   const deltaTime = finishTime - startTime;
 
-  logger.log(`All done in ${bold(ms(deltaTime))}!`);
+  const result: string = [
+    failureCodechecks > 0 ? bold(red(`${failureCodechecks} failed`)) : false,
+    successCodechecks > 0 ? bold(green(`${successCodechecks} succeeded`)) : false,
+    `${failureCodechecks + successCodechecks} total`,
+  ].filter(Boolean).join(", ");
+
+  logger.log(`${bold("Checks:")} ${result}`);
+  logger.log(`${bold("Time:")}   ${ms(deltaTime)}`);
+
+  if (failureCodechecks > 0) {
+    process.exit(1);
+  }
 }
 
 const command = program

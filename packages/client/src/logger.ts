@@ -17,6 +17,14 @@ export function bold(input: string | number): string {
   return chalk.bold(input.toString());
 }
 
+export function red(input: string | number): string {
+  return chalk.red(input.toString());
+}
+
+export function green(input: string | number): string {
+  return chalk.green(input.toString());
+}
+
 export function formatSHA(sha: string): string {
   return sha.slice(0, 8);
 }
