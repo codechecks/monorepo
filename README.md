@@ -66,7 +66,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://twitter.com/timocov_"><img src="https://avatars3.githubusercontent.com/u/3112183?v=4" width="100px;" alt="Evgeniy Timokhov"/><br /><sub><b>Evgeniy Timokhov</b></sub></a><br /><a href="#plugin-timocov" title="Plugin/utility libraries">🔌</a></td>
     <td align="center"><a href="https://michalzalecki.com"><img src="https://avatars1.githubusercontent.com/u/3136577?v=4" width="100px;" alt="Michał Załęcki"/><br /><sub><b>Michał Załęcki</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=MichalZalecki" title="Code">💻</a> <a href="#plugin-MichalZalecki" title="Plugin/utility libraries">🔌</a></td>
     <td align="center"><a href="http://craigsworks.com"><img src="https://avatars0.githubusercontent.com/u/46025159?v=4" width="100px;" alt="Craig Thompson"/><br /><sub><b>Craig Thompson</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=craigthompsonhive" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/ziolekjj"><img src="https://avatars2.githubusercontent.com/u/11246666?v=4" width="100px;" alt="Jakub Ziółkowski"/><br /><sub><b>Jakub Ziółkowski</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=ziolekjj" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/ziolekjj"><img src="https://avatars2.githubusercontent.com/u/11246666?v=4" width="100px;" alt="Jakub Ziółkowski"/><br /><sub><b>Jakub Ziółkowski</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=ziolekjj" title="Code">💻</a> <a href="#plugin-ziolekjj" title="Plugin/utility libraries">🔌</a></td>
   </tr>
 </table>
 
