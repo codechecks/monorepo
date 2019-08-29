@@ -82,7 +82,9 @@ async function main(
     failureCodechecks > 0 ? bold(red(`${failureCodechecks} failed`)) : false,
     successCodechecks > 0 ? bold(green(`${successCodechecks} succeeded`)) : false,
     `${failureCodechecks + successCodechecks} total`,
-  ].filter(Boolean).join(", ");
+  ]
+    .filter(Boolean)
+    .join(", ");
 
   logger.log(`${bold("Checks:")} ${result}`);
   logger.log(`${bold("Time:")}   ${ms(deltaTime)}`);
