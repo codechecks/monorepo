@@ -25,6 +25,8 @@ export async function getConstExecutionContext(
     throw new Error("Provider should never be in fork mode and not in PR mode!");
   }
 
+  const isWithExitStatus: boolean = !!args.withExitStatus;
+
   let prInfo: PrInfo | undefined;
   let projectInfo: ProjectInfo;
   let localMode: SharedExecutionContext["isLocalMode"] | undefined;
@@ -82,6 +84,7 @@ export async function getConstExecutionContext(
       pr: prInfo,
       isFork,
       isSpeculativePr,
+      isWithExitStatus,
     };
   } else {
     return {
@@ -96,6 +99,7 @@ export async function getConstExecutionContext(
       isLocalMode: localMode,
       isFork,
       isSpeculativePr: false,
+      isWithExitStatus,
     };
   }
 }
@@ -142,4 +146,5 @@ export interface SharedExecutionContext {
   };
   isFork: boolean;
   isSpeculativePr: boolean;
+  isWithExitStatus: boolean;
 }

@@ -22,4 +22,5 @@ export interface CodeChecksSettings {
 export interface CodeChecksClientArgs {
   project?: string;
   failFast?: boolean;
+  withExitStatus?: boolean;
 }

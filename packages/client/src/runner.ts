@@ -89,7 +89,7 @@ async function main(
   logger.log(`${bold("Checks:")} ${result}`);
   logger.log(`${bold("Time:")}   ${ms(deltaTime)}`);
 
-  if (failureCodechecks > 0) {
+  if (sharedExecutionCtx.isWithExitStatus && failureCodechecks > 0) {
     process.exit(1);
   }
 }
@@ -98,12 +98,14 @@ const command = program
   .version(require("../package.json").version)
   .option("-p, --project [projectSlug]", "Project slug, works only in local mode")
   .option("--fail-fast", "Stops running checks after the first failure, works only in local mode")
+  .option("-x, --with-exit-status", "Exits the process with exit status according to checks result")
   .usage("codechecks [codechecks.yml|json|ts|js]")
   .parse(process.argv);
 
 const args: CodeChecksClientArgs = {
   project: command.project,
   failFast: command.failFast,
+  withExitStatus: command.withExitStatus,
 };
 
 main(args, command.args.length > 0 ? command.args.map(a => normalizePath(a)) : undefined).catch(e => {
