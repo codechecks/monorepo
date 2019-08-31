@@ -4,6 +4,7 @@ import { Semaphore } from "./Semaphore";
 import { CiProvider, Env } from "./types";
 import { LocalProvider } from "./Local";
 import { BuildKite } from "./BuildKite";
+import { Github } from "./Github";
 
 const providers: { new (env: Env, localProject?: string): CiProvider }[] = [
   Circle,
@@ -11,6 +12,7 @@ const providers: { new (env: Env, localProject?: string): CiProvider }[] = [
   Semaphore,
   BuildKite,
   LocalProvider,
+  Github,
 ];
 
 // @todo refactor passing CLI options
