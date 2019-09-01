@@ -1,4 +1,5 @@
 import { Env, CiProvider } from "./types";
+import { crash } from "../utils/errors";
 
 export function parseRepositorySlug(repoUrl: string): string {
   const GIT_URL_REGEX = /^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+).git$/;

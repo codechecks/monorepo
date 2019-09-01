@@ -1,6 +1,7 @@
 import { logger } from "../logger";
 import { join, dirname } from "path";
 import { executeCodechecksFile } from "./execution";
+import { crash } from "../utils/errors";
 
 export async function executeCodechecksJson(
   path: string,

@@ -1,6 +1,7 @@
 import { PrInfo, FileStatuses } from "./api";
 import { CodeChecksSettings } from "./types";
 import { logger } from "./logger";
+import { crash } from "./utils/errors";
 import execa = require("execa");
 
 const diffParser = require("./js/diff-parser/diff-parser.js").DiffParser;

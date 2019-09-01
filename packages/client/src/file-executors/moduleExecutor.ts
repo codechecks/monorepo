@@ -1,4 +1,5 @@
 import { isFunction } from "util";
+import { crash } from "../utils/errors";
 
 export async function moduleExecutor(module: any, options: any): Promise<void> {
   const hasDefaultExport = !!module.default;

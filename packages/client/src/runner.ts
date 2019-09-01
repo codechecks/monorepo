@@ -17,7 +17,7 @@ import { checkIfIsLocalMode } from "./ci-providers/Local";
 import { logger, printLogo, bold, formatSHA, formatPath } from "./logger";
 import { loadCodechecksSettings } from "./file-handling/settings";
 import { findRootGitRepository } from "./utils/git";
-import { crash, isCodeChecksCrashError } from "./utils/errors";
+import { crash, isCodeChecksCrash } from "./utils/errors";
 import { CodeChecksClientArgs } from "./types";
 
 async function main(
@@ -90,7 +90,7 @@ const args: CodeChecksClientArgs = {
 
 main(args, command.args.length > 0 ? command.args.map(a => normalizePath(a)) : undefined).catch(e => {
   // we want informative output but we don't want leaking secrets into any logs
-  if (isCodeChecksCrashError(e)) {
+  if (isCodeChecksCrash(e)) {
     logger.error(maskSecrets(e.message, process.env));
     logger.debug(maskSecrets(inspect(e), process.env));
   } else {

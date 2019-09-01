@@ -1,5 +1,6 @@
 import { existsSync } from "fs";
 import { join } from "path";
+import { crash } from "./errors";
 
 const REMOTE_URL_REGEXP = /^(?:(?:git\@)|(?:https?:\/\/))github\.com(?::|\/)(.+)$/;
 

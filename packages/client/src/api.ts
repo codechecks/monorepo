@@ -8,6 +8,7 @@ import { StatusCodeError } from "request-promise/errors";
 import { CodeChecksReport, CodeChecksReportStatus } from "./types";
 import { Stream, Readable } from "stream";
 import { Promise as Bluebird, delay } from "bluebird";
+import { crash } from "./utils/errors";
 import { logger } from "./logger";
 
 import request = require("request");

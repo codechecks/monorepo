@@ -6,6 +6,7 @@ import { executeTs } from "./tsExecutor";
 import { executeJs } from "./jsExecutor";
 import { executeCodechecksJson } from "./executeJson";
 import { executeCodechecksYaml } from "./executeYaml";
+import { crash } from "../utils/errors";
 
 const CODECHECKS_FILES_NAMES = [
   "codechecks.yml",

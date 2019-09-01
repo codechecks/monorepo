@@ -6,6 +6,7 @@ import { dirname } from "path";
 import { LocalProvider } from "./ci-providers/Local";
 import { CodeChecksSettings, CodeChecksClientArgs } from "./types";
 import { getPrInfoForSpeculativeBranch } from "./speculativeBranchSelection";
+import { crash } from "./utils/errors";
 
 /**
  * Better part of execution context stays the same for all codechecks files being executed so we just get it once.

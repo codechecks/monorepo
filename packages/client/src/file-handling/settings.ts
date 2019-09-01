@@ -4,6 +4,7 @@ import { existsSync } from "fs";
 import { loadJson } from "../file-executors/executeJson";
 import { loadYaml } from "../file-executors/executeYaml";
 import { DeepPartial } from "ts-essentials";
+import { crash } from "../utils/errors";
 
 const CODECHECKS_SETTINGS_FILES_NAMES = ["codechecks.yml", "codechecks.yaml", "codechecks.json"];
 

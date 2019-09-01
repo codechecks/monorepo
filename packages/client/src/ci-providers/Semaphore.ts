@@ -1,4 +1,5 @@
 import { Env, CiProvider } from "./types";
+import { crash } from "../utils/errors";
 
 export class Semaphore implements CiProvider {
   constructor(private readonly env: Env) {}

@@ -4,6 +4,7 @@ import { Semaphore } from "./Semaphore";
 import { CiProvider, Env } from "./types";
 import { LocalProvider } from "./Local";
 import { BuildKite } from "./BuildKite";
+import { crash } from "../utils/errors";
 
 const providers: { new (env: Env, localProject?: string): CiProvider }[] = [
   Circle,

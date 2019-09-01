@@ -55,7 +55,7 @@ export class CodechecksClient {
 
   public async getDirectory(name: string, destinationPath: string): Promise<void> {
     if (!this.context.pr) {
-      crash("Not a PR!");
+      throw crash("Not a PR!");
     }
     return this.api.getDirectory(name, destinationPath, this.context.pr.base.sha, this.getPublicProjectSlug());
   }

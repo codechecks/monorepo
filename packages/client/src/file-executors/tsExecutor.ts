@@ -4,6 +4,7 @@ import * as JSON5 from "json5";
 
 import { moduleExecutor } from "./moduleExecutor";
 import { logger } from "../logger";
+import { crash } from "../utils/errors";
 
 export async function executeTs(filePath: string, options: any): Promise<void> {
   const customModuleHandler = (module: any, filename: string) => {

@@ -1,5 +1,6 @@
 import { Opaque, Dictionary } from "ts-essentials";
 import { resolve, isAbsolute } from "path";
+import { crash } from "./utils/errors";
 
 export function runOrCatchError<T>(fn: () => T): T | undefined {
   try {
