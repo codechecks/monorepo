@@ -21,7 +21,7 @@ export function findRootGitRepository(path: string): string | undefined {
 export function fullNameFromRemoteUrl(remoteUrl: string): string {
   const matches = remoteUrl.match(REMOTE_URL_REGEXP);
   if (!matches || !matches[1]) {
-    throw new Error(`Can't get project slug from ${remoteUrl}`);
+    throw crash(`Can't get project slug from ${remoteUrl}`);
   }
   return matches[1].replace(/(.git)$/, "");
 }

@@ -36,14 +36,14 @@ export function transpileTypescriptModule(path: string): string {
     source = contents;
   } else {
     if (!hasTypescript) {
-      throw new Error("File written in TS but typescript package is not installed.");
+      throw crash("File written in TS but typescript package is not installed.");
     }
 
     source = transpileTypescript(contents);
   }
 
   if (!source) {
-    throw new Error(`Couldnt parse ${path}`);
+    throw crash(`Couldnt parse ${path}`);
   }
 
   return source;

@@ -27,7 +27,7 @@ export class Travis implements CiProvider {
     }
 
     if (!sha) {
-      throw new Error("Couldnt get target SHA");
+      throw crash("Couldnt get target SHA");
     }
 
     return sha;
@@ -45,7 +45,7 @@ export class Travis implements CiProvider {
     const slug = this.env["TRAVIS_REPO_SLUG"];
 
     if (!slug) {
-      throw new Error("Missing TRAVIS_REPO_SLUG");
+      throw crash("Missing TRAVIS_REPO_SLUG");
     }
 
     return slug;

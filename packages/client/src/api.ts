@@ -248,7 +248,7 @@ export class Api {
 
     const result = runOrCatchError(() => lstatSync(directoryPath));
     if (result && !result.isDirectory) {
-      throw new Error(`${directoryPath} is not a directory!`);
+      throw crash(`${directoryPath} is not a directory!`);
     }
 
     const allFiles = glob.sync(`${directoryPath}/**/*`, {

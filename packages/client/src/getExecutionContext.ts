@@ -22,7 +22,7 @@ export async function getConstExecutionContext(
   const pr = await ciProvider.getPullRequestID();
   const projectSlug = await ciProvider.getProjectSlug();
   if (!pr && isFork) {
-    throw new Error("Provider should never be in fork mode and not in PR mode!");
+    throw crash("Provider should never be in fork mode and not in PR mode!");
   }
 
   let prInfo: PrInfo | undefined;

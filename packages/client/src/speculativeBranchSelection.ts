@@ -16,7 +16,7 @@ export async function getPrInfoForSpeculativeBranch(
     return;
   }
   if (baseCommit === headCommit) {
-    throw new Error(
+    throw crash(
       `Speculative branch selection failed. baseCommit can't be equal to headCommit (${baseCommit}). Please create Pull Request to skip this problem.`,
     );
   }

@@ -32,7 +32,7 @@ function loadSettingsFromFile(filePath: string): CodeChecksSettings | undefined 
     case "yaml":
       return (loadYaml(filePath) || {}).settings;
     default:
-      throw new Error(`Unsupported file extension ${extension}`);
+      throw crash(`Unsupported file extension ${extension}`);
   }
 }
 

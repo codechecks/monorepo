@@ -5,7 +5,7 @@ export function parseRepositorySlug(repoUrl: string): string {
   const repoMatch = repoUrl.match(GIT_URL_REGEX);
 
   if (!repoMatch) {
-    throw new Error(`Couldnt parse repository slug from ${repoUrl}`);
+    throw crash(`Couldnt parse repository slug from ${repoUrl}`);
   }
   return `${repoMatch[4]}/${repoMatch[5]}`;
 }
@@ -30,7 +30,7 @@ export class BuildKite implements CiProvider {
   getCurrentSha(): string {
     const sha = this.env["BUILDKITE_COMMIT"];
     if (!sha) {
-      throw new Error("Couldnt get target SHA");
+      throw crash("Couldnt get target SHA");
     }
 
     return sha;

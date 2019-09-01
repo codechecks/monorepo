@@ -54,7 +54,7 @@ export const standardNameMapper = (path: string) => (checkName: string): string 
     return join(dirname(path), checkName);
   }
 
-  throw new Error(`Module ${checkName} couldn't be found. Tried:
+  throw crash(`Module ${checkName} couldn't be found. Tried:
 - @codechecks/${checkName}
 - ${checkName}
 `);

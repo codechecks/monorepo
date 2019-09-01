@@ -14,7 +14,7 @@ export class Semaphore implements CiProvider {
   getCurrentSha(): string {
     const sha = this.env["SEMAPHORE_GIT_SHA"];
     if (!sha) {
-      throw new Error("Couldnt get target SHA");
+      throw crash("Couldnt get target SHA");
     }
 
     return sha;
@@ -31,7 +31,7 @@ export class Semaphore implements CiProvider {
   public getProjectSlug(): string {
     const slug = this.env["SEMAPHORE_PROJECT_NAME"];
     if (!slug) {
-      throw new Error("Couldnt get repo slug");
+      throw crash("Couldnt get repo slug");
     }
 
     return `${this.env["SEMAPHORE_PROJECT_NAME"]}/${this.env["SEMAPHORE_GIT_DIR"]}`;
