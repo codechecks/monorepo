@@ -1,5 +1,6 @@
 import { Opaque, Dictionary } from "ts-essentials";
 import { resolve, isAbsolute } from "path";
+import { crash } from "./utils/errors";
 
 export function runOrCatchError<T>(fn: () => T): T | undefined {
   try {
@@ -12,7 +13,7 @@ export function runOrCatchError<T>(fn: () => T): T | undefined {
 export function getRequiredEnv(name: string): string {
   const value = process.env[name];
   if (value === undefined) {
-    throw new Error(`Required env var ${name} missing`);
+    throw crash(`Required env var ${name} missing`);
   }
 
   return value;
@@ -35,6 +36,6 @@ export function maskSecrets(output: string, env: Dictionary<string | undefined>)
 
 export function ensureAbsolutePath(path: string): void {
   if (!isAbsolute(path)) {
-    throw new Error(`${path} has to be an absolute path!`);
+    throw crash(`${path} has to be an absolute path!`);
   }
 }

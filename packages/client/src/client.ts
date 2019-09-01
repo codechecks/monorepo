@@ -3,6 +3,7 @@ import { ExecutionContext } from "./getExecutionContext";
 import { CodeChecksReport, CodeChecksReportBody } from "./types";
 import { join } from "path";
 import { processReport } from "./ci-providers/Local";
+import { crash } from "./utils/errors";
 const urlJoin = require("url-join") as (...args: string[]) => string;
 
 export class NotPrError extends Error {
@@ -25,7 +26,7 @@ export class CodechecksClient {
 
   public async getValue<T>(name: string): Promise<T | undefined> {
     if (!this.context.pr) {
-      throw new NotPrError();
+      throw crash("Not a PR!");
     }
     return this.api.getValue<T>(name, this.context.pr.base.sha, this.getPublicProjectSlug());
   }
@@ -39,7 +40,7 @@ export class CodechecksClient {
 
   public async getFile(name: string, destinationPath: string): Promise<void> {
     if (!this.context.pr) {
-      throw new NotPrError();
+      throw crash("Not a PR!");
     }
 
     return this.api.getFile(`${this.context.pr.base.sha}/${name}`, destinationPath, this.getPublicProjectSlug());
@@ -54,7 +55,7 @@ export class CodechecksClient {
 
   public async getDirectory(name: string, destinationPath: string): Promise<void> {
     if (!this.context.pr) {
-      throw new NotPrError();
+      throw crash("Not a PR!");
     }
     return this.api.getDirectory(name, destinationPath, this.context.pr.base.sha, this.getPublicProjectSlug());
   }

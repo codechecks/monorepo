@@ -1,6 +1,7 @@
 import { PrInfo, FileStatuses } from "./api";
 import { CodeChecksSettings } from "./types";
 import { logger } from "./logger";
+import { crash } from "./utils/errors";
 import execa = require("execa");
 
 const diffParser = require("./js/diff-parser/diff-parser.js").DiffParser;
@@ -16,7 +17,7 @@ export async function getPrInfoForSpeculativeBranch(
     return;
   }
   if (baseCommit === headCommit) {
-    throw new Error(
+    throw crash(
       `Speculative branch selection failed. baseCommit can't be equal to headCommit (${baseCommit}). Please create Pull Request to skip this problem.`,
     );
   }
