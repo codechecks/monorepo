@@ -1,9 +1,9 @@
 import { join } from "path";
 
 import { readEnvFile } from "./utils";
-import { Github } from "../Github";
+import { GithubActions } from "../GithubActions";
 
-describe("Github", () => {
+describe("Github Actions", () => {
   const env = readEnvFile(join(__dirname, "__fixtures__", "github/pr.env"));
   const envFork = readEnvFile(join(__dirname, "__fixtures__", "github/fork.env"));
   const envNoPR = readEnvFile(join(__dirname, "__fixtures__", "github/nopr.env"));
@@ -16,43 +16,43 @@ describe("Github", () => {
   envNoPR.GITHUB_EVENT_PATH = join(__dirname, envNoPR.GITHUB_EVENT_PATH || "");
 
   it("should detect github", () => {
-    const provider = new Github(env);
+    const provider = new GithubActions(env);
 
     expect(provider.isCurrentlyRunning()).toBe(true);
   });
 
   it("should not detect github when not running inside github", () => {
-    const provider = new Github({});
+    const provider = new GithubActions({});
 
     expect(provider.isCurrentlyRunning()).toBe(false);
   });
 
   it("should get pull request id", () => {
-    const provider = new Github(env);
+    const provider = new GithubActions(env);
 
     expect(provider.getPullRequestID()).toBe(2);
   });
 
   it("should not get pull request id if not running in PR context", () => {
-    const provider = new Github(envNoPR);
+    const provider = new GithubActions(envNoPR);
 
     expect(provider.getPullRequestID()).toBeUndefined();
   });
 
   it("should get target SHA", () => {
-    const provider = new Github(env);
+    const provider = new GithubActions(env);
 
     expect(provider.getCurrentSha()).toBe("ffac537e6cbbf934b08745a378932722df287a53");
   });
 
   it("should not detect fork mode", () => {
-    const provider = new Github(env);
+    const provider = new GithubActions(env);
 
     expect(provider.isFork()).toBe(false);
   });
 
   it("should detect fork mode", () => {
-    const provider = new Github(envFork);
+    const provider = new GithubActions(envFork);
 
     expect(provider.isFork()).toBe(true);
   });

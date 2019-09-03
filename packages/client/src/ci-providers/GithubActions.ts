@@ -1,6 +1,6 @@
 import { Env, CiProvider } from "./types";
 
-export class Github implements CiProvider {
+export class GithubActions implements CiProvider {
   constructor(private readonly env: Env) {}
 
   isCurrentlyRunning(): boolean {

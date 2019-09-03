@@ -3,7 +3,7 @@ import { Circle } from "./Circle";
 import { Travis } from "./Travis";
 import { Semaphore } from "./Semaphore";
 import { BuildKite } from "./BuildKite";
-import { Github } from "./Github";
+import { GithubActions } from "./GithubActions";
 
 import { CiProvider, Env } from "./types";
 import { crash } from "../utils/errors";
@@ -14,7 +14,7 @@ const providers: { new (env: Env, localProject?: string): CiProvider }[] = [
   Semaphore,
   BuildKite,
   LocalProvider,
-  Github,
+  GithubActions,
 ];
 
 // @todo refactor passing CLI options
