@@ -1,6 +1,7 @@
 import { logger } from "../logger";
 import { join, dirname } from "path";
 import { executeCodechecksFile } from "./execution";
+import { crash } from "../utils/errors";
 
 export async function executeCodechecksJson(
   path: string,
@@ -54,7 +55,7 @@ export const standardNameMapper = (path: string) => (checkName: string): string 
     return join(dirname(path), checkName);
   }
 
-  throw new Error(`Module ${checkName} couldn't be found. Tried:
+  throw crash(`Module ${checkName} couldn't be found. Tried:
 - @codechecks/${checkName}
 - ${checkName}
 `);

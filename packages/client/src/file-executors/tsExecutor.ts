@@ -4,6 +4,7 @@ import * as JSON5 from "json5";
 
 import { moduleExecutor } from "./moduleExecutor";
 import { logger } from "../logger";
+import { crash } from "../utils/errors";
 
 export async function executeTs(filePath: string, options: any): Promise<void> {
   const customModuleHandler = (module: any, filename: string) => {
@@ -36,14 +37,14 @@ export function transpileTypescriptModule(path: string): string {
     source = contents;
   } else {
     if (!hasTypescript) {
-      throw new Error("File written in TS but typescript package is not installed.");
+      throw crash("File written in TS but typescript package is not installed.");
     }
 
     source = transpileTypescript(contents);
   }
 
   if (!source) {
-    throw new Error(`Couldnt parse ${path}`);
+    throw crash(`Couldnt parse ${path}`);
   }
 
   return source;

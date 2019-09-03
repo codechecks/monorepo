@@ -8,6 +8,7 @@ import { StatusCodeError } from "request-promise/errors";
 import { CodeChecksReport, CodeChecksReportStatus } from "./types";
 import { Stream, Readable } from "stream";
 import { Promise as Bluebird, delay } from "bluebird";
+import { crash } from "./utils/errors";
 import { logger } from "./logger";
 
 import request = require("request");
@@ -248,7 +249,7 @@ export class Api {
 
     const result = runOrCatchError(() => lstatSync(directoryPath));
     if (result && !result.isDirectory) {
-      throw new Error(`${directoryPath} is not a directory!`);
+      throw crash(`${directoryPath} is not a directory!`);
     }
 
     const allFiles = glob.sync(`${directoryPath}/**/*`, {

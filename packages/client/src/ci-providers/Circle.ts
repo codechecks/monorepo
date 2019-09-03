@@ -1,4 +1,5 @@
 import { Env, CiProvider } from "./types";
+import { crash } from "../utils/errors";
 
 export class Circle implements CiProvider {
   constructor(private readonly env: Env) {}
@@ -24,7 +25,7 @@ export class Circle implements CiProvider {
   getCurrentSha(): string {
     const sha = this.env["CIRCLE_SHA1"];
     if (!sha) {
-      throw new Error("Couldnt get target SHA");
+      throw crash("Couldnt get target SHA");
     }
 
     return sha;
@@ -43,7 +44,7 @@ export class Circle implements CiProvider {
     const projectName = this.env["CIRCLE_PROJECT_REPONAME"];
 
     if (!user || !projectName) {
-      throw new Error("Missing CIRCLE_PROJECT_USERNAME or CIRCLE_PROJECT_REPONAME");
+      throw crash("Missing CIRCLE_PROJECT_USERNAME or CIRCLE_PROJECT_REPONAME");
     }
 
     return `${user}/${projectName}`;
