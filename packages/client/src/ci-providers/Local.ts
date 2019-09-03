@@ -16,6 +16,8 @@ export class LocalProvider implements CiProvider {
   constructor(private readonly env: Env, private readonly forcedLocalProjectSlug?: string) {}
 
   isCurrentlyRunning(): boolean {
+    // additionally local CI provider will be ignored if any other CI is detected. It's done like this because it's hard to detect if we ran inside ANY CI.
+    // ex. GithubActions doesnt set CI = true
     const isCI = this.env["CI"];
 
     return !isCI;
