@@ -1,7 +1,6 @@
 import { PrInfo, FileStatuses } from "./api";
 import { CodeChecksSettings } from "./types";
 import { logger } from "./logger";
-import { crash } from "./utils/errors";
 import execa = require("execa");
 
 const diffParser = require("./js/diff-parser/diff-parser.js").DiffParser;
@@ -17,9 +16,8 @@ export async function getPrInfoForSpeculativeBranch(
     return;
   }
   if (baseCommit === headCommit) {
-    throw crash(
-      `Speculative branch selection failed. baseCommit can't be equal to headCommit (${baseCommit}). Please create Pull Request to skip this problem.`,
-    );
+    // this can happen when someone created a new branch but its still on the same commit as master. we should just treat it as no pr
+    return;
   }
 
   const fileStatuses = await getFileStatuses(gitRepoRootPath, baseCommit, headCommit);
@@ -51,7 +49,7 @@ async function getBaseCommit(repoPath: string, speculativeBranchesInOrder: strin
   logger.debug({ baseBranchName });
 
   if (baseBranchName) {
-    // @NOTE: this might be CircleCI specific thing but for some reason we NEED to take remote branch origin/* because local one is somehow already updated but this might now work on some environments...
+    // @NOTE: this might be CircleCI specific thing but for some reason we NEED to take remote branch origin/* because local one is somehow already updated but this might not work on some environments...
     try {
       await run(repoPath, `git fetch origin ${baseBranchName}`);
       const sha = await run(repoPath, `git rev-parse FETCH_HEAD`);
