@@ -26,7 +26,11 @@ export function findProvider(env: Env, localProject?: string): CiProvider {
     throw crash("Could not find running CI.");
   }
   if (currentlyRunningProviders.length > 1) {
-    throw crash("Found more than 1 running CI o_O");
+    throw crash(`Found more than 1 running CI! Found CIs: ${getClassName(currentlyRunningProviders)}`);
   }
   return currentlyRunningProviders[0];
+}
+
+function getClassName(instance: any): string {
+  return instance.constructor.name || "unnamed class";
 }
