@@ -1,4 +1,5 @@
 import { Env, CiProvider } from "./types";
+import { crash } from "../utils/errors";
 
 export class GithubActions implements CiProvider {
   constructor(private readonly env: Env) {}
@@ -27,14 +28,14 @@ export class GithubActions implements CiProvider {
     try {
       return require(eventPath);
     } catch (error) {
-      throw new Error(`Could not parse Github event JSON file: ${error}`);
+      throw crash(`Could not parse Github event JSON file: ${error}`);
     }
   }
 
   getCurrentSha(): string {
     const sha = this.env["GITHUB_SHA"];
     if (!sha) {
-      throw new Error("Couldn't get target SHA");
+      throw crash("Couldn't get target SHA");
     }
 
     return sha;
@@ -50,13 +51,14 @@ export class GithubActions implements CiProvider {
     const projectSlug = this.env["GITHUB_REPOSITORY"];
 
     if (!projectSlug) {
-      throw new Error("Missing GITHUB_REPOSITORY");
+      throw crash("Missing GITHUB_REPOSITORY");
     }
 
     return projectSlug;
   }
 
   public supportsSpeculativeBranchSelection(): boolean {
-    return true;
+    // github actions have explicit event for PR creation so we don't need speculative branch selection
+    return false;
   }
 }
