@@ -1,6 +1,9 @@
 import { Env, CiProvider } from "./types";
 import { crash } from "../utils/errors";
 
+// github actions have explicit event for PR creation but we cant use it since it fired only once
+// in future we need to build a mechanism to get pull request information using API since it's impossible to get from the inside the PR
+
 export class GithubActions implements CiProvider {
   constructor(private readonly env: Env) {}
 
@@ -9,27 +12,7 @@ export class GithubActions implements CiProvider {
   }
 
   getPullRequestID(): number | undefined {
-    if (this.env["GITHUB_EVENT_NAME"] !== "pull_request") {
-      return undefined;
-    }
-    const eventPayload = this.getEventPayload();
-    const prNumber = eventPayload.number;
-
-    if (!prNumber || isNaN(prNumber)) {
-      return undefined;
-    }
-
-    return prNumber;
-  }
-
-  private getEventPayload(): { number: number } {
-    const eventPath = this.env["GITHUB_EVENT_PATH"] || "";
-
-    try {
-      return require(eventPath);
-    } catch (error) {
-      throw crash(`Could not parse Github event JSON file: ${error}`);
-    }
+    return undefined;
   }
 
   getCurrentSha(): string {
@@ -58,7 +41,6 @@ export class GithubActions implements CiProvider {
   }
 
   public supportsSpeculativeBranchSelection(): boolean {
-    // github actions have explicit event for PR creation so we don't need speculative branch selection
-    return false;
+    return true;
   }
 }
