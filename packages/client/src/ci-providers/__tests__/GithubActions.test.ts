@@ -4,8 +4,8 @@ import { readEnvFile } from "./utils";
 import { GithubActions } from "../GithubActions";
 
 describe("Github Actions", () => {
-  const env = readEnvFile(join(__dirname, "__fixtures__", "github/pr.env"));
-  const envFork = readEnvFile(join(__dirname, "__fixtures__", "github/fork.env"));
+  const env = readEnvFile(join(__dirname, "__fixtures__", "githubActions/pr.env"));
+  const envFork = readEnvFile(join(__dirname, "__fixtures__", "githubActions/fork.env"));
 
   it("should detect github", () => {
     const provider = new GithubActions(env);
