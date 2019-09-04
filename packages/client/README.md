@@ -39,6 +39,12 @@ export default async () => {
 Particular codechecks can be distributed as **npm** packages and can be setup in a declarative way in
 [`codechecks.yml`](https://github.com/codechecks/docs/blob/master/configuration.md#codechecksyml) file.
 
+## Install
+
+```sh
+npm add --save-dev @codechecks/client
+```
+
 ## Docs 📚
 
 - [Awesome codechecks](https://github.com/codechecks/awesome-codechecks)
