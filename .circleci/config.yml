@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Run codechecks
           # we use local version of a client
-          command: ./packages/client/dist/runner.js
+          command: DEBUG=* ./packages/client/dist/runner.js
 
 workflows:
   version: 2
