@@ -32,6 +32,10 @@ jobs:
           name: Run codechecks
           # we use local version of a client
           command: DEBUG=* ./packages/client/dist/runner.js
+      
+      - run:
+          name: Run audit
+          command: .circleci/audit-client-package.sh
 
 workflows:
   version: 2
