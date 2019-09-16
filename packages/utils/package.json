@@ -1,19 +1,13 @@
 {
   "name": "@codechecks/utils",
-  "description": "Open source platform for code review automation",
+  "description": "Utils to simplify codechecks plugins development",
   "keywords": [
-    "code-review",
-    "code",
-    "review",
     "codechecks",
-    "automation",
-    "continuous-review",
-    "github",
-    "pull-request"
+    "utils"
   ],
   "repository": "codechecks/monorepo",
   "author": "Chris Kaczor <chris@kaczor.io>",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index.js",
   "bin": {
     "codechecks": "dist/runner.js"

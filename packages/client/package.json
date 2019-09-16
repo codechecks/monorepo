@@ -42,7 +42,7 @@
     "promise": "^8.0.2",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
-    "ts-essentials": "^1.0.2",
+    "ts-essentials": "^3.0.2",
     "ts-node": "^8.0.2",
     "url-join": "^4.0.0"
   },
