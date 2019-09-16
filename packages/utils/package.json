@@ -65,6 +65,7 @@
     "@types/ms": "^0.7.30",
     "@types/request-promise": "^4.1.42",
     "@types/tmp": "^0.1.0",
+    "execa": "^2.0.4",
     "fs-extra": "^8.1.0",
     "mock-fs": "^4.10.1"
   },
