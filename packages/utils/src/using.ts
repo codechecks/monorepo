@@ -19,7 +19,7 @@ export async function using<T extends Dictionary<() => AsyncOrSync<DisposableRes
   const allDisposablePromises = mapValues(disposable, d => d());
   const resources = await promiseAll(allDisposablePromises);
 
-  await fn(resources as any);
+  await fn(resources);
 
   const disposeAllResources = mapValues(resources, r => r.dispose());
   await promiseAll(disposeAllResources);

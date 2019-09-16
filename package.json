@@ -30,7 +30,7 @@
     "ts-node": "^7.0.1",
     "tsconfig-paths": "^3.7.0",
     "tslint": "^5.11.0",
-    "typescript": "^3.1.6",
+    "typescript": "^3.6.3",
     "typestrict": "^1.0.1",
     "wsrun": "^5.0.0"
   },
