@@ -17,6 +17,7 @@ import { checkIfIsLocalMode } from "./ci-providers/Local";
 import { logger, printLogo, bold, red, green, formatSHA, formatPath } from "./logger";
 import { loadCodechecksSettings } from "./file-handling/settings";
 import { findRootGitRepository } from "./utils/git";
+import { crash, isCodeChecksCrash } from "./utils/errors";
 import { CodeChecksClientArgs } from "./types";
 
 async function main(
@@ -37,7 +38,7 @@ async function main(
 
   const gitRoot = findRootGitRepository(process.cwd());
   if (!gitRoot) {
-    throw new Error("Couldn't find git project root!");
+    throw crash("Couldn't find git project root!");
   }
   const settings = await loadCodechecksSettings(gitRoot);
   const sharedExecutionCtx = await getConstExecutionContext(api, provider, settings, gitRoot, args);
@@ -110,8 +111,12 @@ const args: CodeChecksClientArgs = {
 
 main(args, command.args.length > 0 ? command.args.map(a => normalizePath(a)) : undefined).catch(e => {
   // we want informative output but we don't want leaking secrets into any logs
-  logger.error(maskSecrets(e.message, process.env));
-  logger.debug(maskSecrets(inspect(e), process.env));
+  if (isCodeChecksCrash(e)) {
+    logger.error(maskSecrets(e.message, process.env));
+    logger.debug(maskSecrets(inspect(e), process.env));
+  } else {
+    logger.log(maskSecrets(inspect(e), process.env));
+  }
   process.exit(1);
 });
 

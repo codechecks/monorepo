@@ -6,6 +6,7 @@ import { executeTs } from "./tsExecutor";
 import { executeJs } from "./jsExecutor";
 import { executeCodechecksJson } from "./executeJson";
 import { executeCodechecksYaml } from "./executeYaml";
+import { crash } from "../utils/errors";
 
 const CODECHECKS_FILES_NAMES = [
   "codechecks.yml",
@@ -30,7 +31,7 @@ export async function executeCodechecksFile(codeChecksFilePath: string, options?
     case "yaml":
       return await executeCodechecksYaml(codeChecksFilePath);
     default:
-      throw new Error(`Unsupported file extension ${extension}`);
+      throw crash(`Unsupported file extension ${extension}`);
   }
 }
 
@@ -40,7 +41,7 @@ export function findCodechecksFiles(basePath: string): Path[] {
   });
 
   if (existingFiles.length === 0) {
-    throw new Error(`Couldnt find CodeChecks files. Checked path: ${basePath}`);
+    throw crash(`Couldnt find CodeChecks files. Checked path: ${basePath}`);
   }
 
   return existingFiles as any[];

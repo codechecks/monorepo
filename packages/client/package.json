@@ -13,7 +13,7 @@
   ],
   "repository": "codechecks/monorepo",
   "author": "Chris Kaczor <chris@kaczor.io>",
-  "version": "0.1.7",
+  "version": "0.1.9",
   "main": "dist/index.js",
   "bin": {
     "codechecks": "dist/runner.js"
@@ -35,8 +35,8 @@
     "js-yaml": "^3.13.1",
     "json5": "^2.1.0",
     "lodash": "^4.17.11",
-    "marked": "^0.6.2",
-    "marked-terminal": "^3.2.0",
+    "marked": "^0.7.0",
+    "marked-terminal": "^3.3.0",
     "mkdirp": "^0.5.1",
     "ms": "^2.1.1",
     "promise": "^8.0.2",

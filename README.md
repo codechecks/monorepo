@@ -7,7 +7,7 @@
   <p align="center">
     <a href="https://circleci.com/gh/codechecks/monorepo"><img alt="Build Status" src="https://circleci.com/gh/codechecks/monorepo/tree/master.svg?style=svg"></a>
     <a href="/package.json"><img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"></a>
-    <img src="https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square" alt="All Contributors">
+    <img src="https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square" alt="All Contributors">
     <a href="https://codechecks.io"><img src="https://raw.githubusercontent.com/codechecks/docs/master/images/badges/badge-default.svg?sanitize=true" alt="codechecks.io"></a>
   </p>
 </p>
@@ -67,6 +67,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://michalzalecki.com"><img src="https://avatars1.githubusercontent.com/u/3136577?v=4" width="100px;" alt="Michał Załęcki"/><br /><sub><b>Michał Załęcki</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=MichalZalecki" title="Code">💻</a> <a href="#plugin-MichalZalecki" title="Plugin/utility libraries">🔌</a></td>
     <td align="center"><a href="http://craigsworks.com"><img src="https://avatars0.githubusercontent.com/u/46025159?v=4" width="100px;" alt="Craig Thompson"/><br /><sub><b>Craig Thompson</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=craigthompsonhive" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/ziolekjj"><img src="https://avatars2.githubusercontent.com/u/11246666?v=4" width="100px;" alt="Jakub Ziółkowski"/><br /><sub><b>Jakub Ziółkowski</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=ziolekjj" title="Code">💻</a> <a href="#plugin-ziolekjj" title="Plugin/utility libraries">🔌</a></td>
+    <td align="center"><a href="https://github.com/dericgw"><img src="https://avatars2.githubusercontent.com/u/34040106?v=4" width="100px;" alt="Deric Cain"/><br /><sub><b>Deric Cain</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=dericgw" title="Code">💻</a></td>
   </tr>
 </table>
 

@@ -6,6 +6,7 @@ import { dirname } from "path";
 import { LocalProvider } from "./ci-providers/Local";
 import { CodeChecksSettings, CodeChecksClientArgs } from "./types";
 import { getPrInfoForSpeculativeBranch } from "./speculativeBranchSelection";
+import { crash } from "./utils/errors";
 
 /**
  * Better part of execution context stays the same for all codechecks files being executed so we just get it once.
@@ -22,7 +23,7 @@ export async function getConstExecutionContext(
   const pr = await ciProvider.getPullRequestID();
   const projectSlug = await ciProvider.getProjectSlug();
   if (!pr && isFork) {
-    throw new Error("Provider should never be in fork mode and not in PR mode!");
+    throw crash("Provider should never be in fork mode and not in PR mode!");
   }
 
   const isWithExitStatus: boolean = !!args.withExitStatus;
