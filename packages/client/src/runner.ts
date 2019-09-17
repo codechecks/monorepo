@@ -19,6 +19,7 @@ import { loadCodechecksSettings } from "./file-handling/settings";
 import { findRootGitRepository } from "./utils/git";
 import { crash, isCodeChecksCrash } from "./utils/errors";
 import { CodeChecksClientArgs } from "./types";
+import { getRunnerConfig } from "./getRunnerConfig";
 
 async function main(
   args: CodeChecksClientArgs,
@@ -57,6 +58,8 @@ async function main(
   }
   console.log();
 
+  const runnerConfig = getRunnerConfig(args);
+
   let successCodechecks = 0;
   let failureCodechecks = 0;
 
@@ -90,7 +93,7 @@ async function main(
   logger.log(`${bold("Checks:")} ${result}`);
   logger.log(`${bold("Time:")}   ${ms(deltaTime)}`);
 
-  if (sharedExecutionCtx.isWithExitStatus && failureCodechecks > 0) {
+  if (runnerConfig.isWithExitStatus && failureCodechecks > 0) {
     process.exit(1);
   }
 }

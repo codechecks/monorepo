@@ -24,3 +24,7 @@ export interface CodeChecksClientArgs {
   failFast?: boolean;
   withExitStatus?: boolean;
 }
+
+export interface RunnerConfig {
+  isWithExitStatus: boolean;
+}

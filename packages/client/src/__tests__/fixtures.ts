@@ -32,5 +32,4 @@ export const contextFixture: (params?: Partial<ExecutionContext>) => ExecutionCo
   },
   isFork: false,
   isSpeculativePr: false,
-  isWithExitStatus: false,
 });
