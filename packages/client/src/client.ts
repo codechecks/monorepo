@@ -13,6 +13,8 @@ export class NotPrError extends Error {
 }
 
 export class CodechecksClient {
+  private reports: CodeChecksReport[] = [];
+
   constructor(private readonly api: Api, public readonly context: ExecutionContext) {}
 
   private getPublicProjectSlug(): string | undefined {
@@ -68,6 +70,8 @@ export class CodechecksClient {
   }
 
   public async report(report: CodeChecksReport): Promise<void> {
+    this.reports.push(report);
+
     if (this.context.isLocalMode) {
       return processReport(report, this.context);
     } else {
@@ -90,6 +94,14 @@ export class CodechecksClient {
 
   public isPr(): boolean {
     return this.context.isPr;
+  }
+
+  public countFailures(): number {
+    return this.reports.filter(r => r.status === "failure").length;
+  }
+
+  public countSuccesses(): number {
+    return this.reports.filter(r => r.status === "success").length;
   }
 
   /**

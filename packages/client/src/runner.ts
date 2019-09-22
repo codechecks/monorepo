@@ -14,11 +14,12 @@ import { normalizePath, Path, maskSecrets } from "./utils";
 import { executeCodechecksFile, findCodechecksFiles } from "./file-executors/execution";
 import { codechecks as globalClient } from ".";
 import { checkIfIsLocalMode } from "./ci-providers/Local";
-import { logger, printLogo, bold, formatSHA, formatPath } from "./logger";
+import { logger, printLogo, bold, red, green, formatSHA, formatPath } from "./logger";
 import { loadCodechecksSettings } from "./file-handling/settings";
 import { findRootGitRepository } from "./utils/git";
 import { crash, isCodeChecksCrash } from "./utils/errors";
 import { CodeChecksClientArgs } from "./types";
+import { getRunnerConfig } from "./getRunnerConfig";
 
 async function main(
   args: CodeChecksClientArgs,
@@ -57,6 +58,11 @@ async function main(
   }
   console.log();
 
+  const runnerConfig = getRunnerConfig(args);
+
+  let successCodechecks = 0;
+  let failureCodechecks = 0;
+
   for (const codecheckFile of codecheckFiles) {
     logger.log(`Executing ${bold(formatPath(codecheckFile, gitRoot))}...`);
     logger.log();
@@ -68,24 +74,42 @@ async function main(
     (global as any).__codechecks_client = _client;
 
     await executeCodechecksFile(codecheckFile);
+
+    successCodechecks += _client.countSuccesses();
+    failureCodechecks += _client.countFailures();
   }
 
   const finishTime = new Date().getTime();
   const deltaTime = finishTime - startTime;
 
-  logger.log(`All done in ${bold(ms(deltaTime))}!`);
+  const result: string = [
+    failureCodechecks > 0 ? bold(red(`${failureCodechecks} failed`)) : false,
+    successCodechecks > 0 ? bold(green(`${successCodechecks} succeeded`)) : false,
+    `${failureCodechecks + successCodechecks} total`,
+  ]
+    .filter(Boolean)
+    .join(", ");
+
+  logger.log(`${bold("Checks:")} ${result}`);
+  logger.log(`${bold("Time:")}   ${ms(deltaTime)}`);
+
+  if (runnerConfig.isWithExitStatus && failureCodechecks > 0) {
+    process.exit(1);
+  }
 }
 
 const command = program
   .version(require("../package.json").version)
   .option("-p, --project [projectSlug]", "Project slug, works only in local mode")
   .option("--fail-fast", "Stops running checks after the first failure, works only in local mode")
+  .option("-x, --with-exit-status", "Exits the process with exit status according to checks result")
   .usage("codechecks [codechecks.yml|json|ts|js]")
   .parse(process.argv);
 
 const args: CodeChecksClientArgs = {
   project: command.project,
   failFast: command.failFast,
+  withExitStatus: command.withExitStatus,
 };
 
 main(args, command.args.length > 0 ? command.args.map(a => normalizePath(a)) : undefined).catch(e => {
