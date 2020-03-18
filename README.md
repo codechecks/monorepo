@@ -58,19 +58,25 @@ Note: Currently we are in the process of open sourcing whole platform.
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://twitter.com/krzkaczor"><img src="https://avatars2.githubusercontent.com/u/1814312?v=4" width="100px;" alt="Chris Kaczor"/><br /><sub><b>Chris Kaczor</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=krzkaczor" title="Code">💻</a> <a href="#ideas-krzkaczor" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/codechecks/monorepo/commits?author=krzkaczor" title="Documentation">📖</a> <a href="#business-krzkaczor" title="Business development">💼</a> <a href="#infra-krzkaczor" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
-    <td align="center"><a href="https://cgewecke.github.io/"><img src="https://avatars0.githubusercontent.com/u/7332026?v=4" width="100px;" alt="cgewecke"/><br /><sub><b>cgewecke</b></sub></a><br /><a href="#plugin-cgewecke" title="Plugin/utility libraries">🔌</a> <a href="#ideas-cgewecke" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/codechecks/monorepo/commits?author=cgewecke" title="Code">💻</a></td>
-    <td align="center"><a href="https://twitter.com/timocov_"><img src="https://avatars3.githubusercontent.com/u/3112183?v=4" width="100px;" alt="Evgeniy Timokhov"/><br /><sub><b>Evgeniy Timokhov</b></sub></a><br /><a href="#plugin-timocov" title="Plugin/utility libraries">🔌</a></td>
-    <td align="center"><a href="https://michalzalecki.com"><img src="https://avatars1.githubusercontent.com/u/3136577?v=4" width="100px;" alt="Michał Załęcki"/><br /><sub><b>Michał Załęcki</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=MichalZalecki" title="Code">💻</a> <a href="#plugin-MichalZalecki" title="Plugin/utility libraries">🔌</a></td>
-    <td align="center"><a href="http://craigsworks.com"><img src="https://avatars0.githubusercontent.com/u/46025159?v=4" width="100px;" alt="Craig Thompson"/><br /><sub><b>Craig Thompson</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=craigthompsonhive" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/ziolekjj"><img src="https://avatars2.githubusercontent.com/u/11246666?v=4" width="100px;" alt="Jakub Ziółkowski"/><br /><sub><b>Jakub Ziółkowski</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=ziolekjj" title="Code">💻</a> <a href="#plugin-ziolekjj" title="Plugin/utility libraries">🔌</a></td>
-    <td align="center"><a href="https://github.com/dericgw"><img src="https://avatars2.githubusercontent.com/u/34040106?v=4" width="100px;" alt="Deric Cain"/><br /><sub><b>Deric Cain</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=dericgw" title="Code">💻</a></td>
+    <td align="center"><a href="https://twitter.com/krzkaczor"><img src="https://avatars2.githubusercontent.com/u/1814312?v=4" width="100px;" alt=""/><br /><sub><b>Chris Kaczor</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=krzkaczor" title="Code">💻</a> <a href="#ideas-krzkaczor" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/codechecks/monorepo/commits?author=krzkaczor" title="Documentation">📖</a> <a href="#business-krzkaczor" title="Business development">💼</a> <a href="#infra-krzkaczor" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://cgewecke.github.io/"><img src="https://avatars0.githubusercontent.com/u/7332026?v=4" width="100px;" alt=""/><br /><sub><b>cgewecke</b></sub></a><br /><a href="#plugin-cgewecke" title="Plugin/utility libraries">🔌</a> <a href="#ideas-cgewecke" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/codechecks/monorepo/commits?author=cgewecke" title="Code">💻</a></td>
+    <td align="center"><a href="https://twitter.com/timocov_"><img src="https://avatars3.githubusercontent.com/u/3112183?v=4" width="100px;" alt=""/><br /><sub><b>Evgeniy Timokhov</b></sub></a><br /><a href="#plugin-timocov" title="Plugin/utility libraries">🔌</a></td>
+    <td align="center"><a href="https://michalzalecki.com"><img src="https://avatars1.githubusercontent.com/u/3136577?v=4" width="100px;" alt=""/><br /><sub><b>Michał Załęcki</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=MichalZalecki" title="Code">💻</a> <a href="#plugin-MichalZalecki" title="Plugin/utility libraries">🔌</a></td>
+    <td align="center"><a href="http://craigsworks.com"><img src="https://avatars0.githubusercontent.com/u/46025159?v=4" width="100px;" alt=""/><br /><sub><b>Craig Thompson</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=craigthompsonhive" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/ziolekjj"><img src="https://avatars2.githubusercontent.com/u/11246666?v=4" width="100px;" alt=""/><br /><sub><b>Jakub Ziółkowski</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=ziolekjj" title="Code">💻</a> <a href="#plugin-ziolekjj" title="Plugin/utility libraries">🔌</a></td>
+    <td align="center"><a href="https://github.com/dericgw"><img src="https://avatars2.githubusercontent.com/u/34040106?v=4" width="100px;" alt=""/><br /><sub><b>Deric Cain</b></sub></a><br /><a href="https://github.com/codechecks/monorepo/commits?author=dericgw" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="http://www.seandawson.info"><img src="https://avatars1.githubusercontent.com/u/2357137?v=4" width="100px;" alt=""/><br /><sub><b>Sean Dawson</b></sub></a><br /><a href="#plugin-NoxHarmonium" title="Plugin/utility libraries">🔌</a></td>
   </tr>
 </table>
 
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification.
