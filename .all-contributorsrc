@@ -80,7 +80,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "NoxHarmonium",
+      "name": "Sean Dawson",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/2357137?v=4",
+      "profile": "http://www.seandawson.info",
+      "contributions": [
+        "plugin"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
