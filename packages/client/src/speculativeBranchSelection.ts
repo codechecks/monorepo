@@ -2,6 +2,7 @@ import { PrInfo, FileStatuses } from "./api";
 import { CodeChecksSettings } from "./types";
 import { logger } from "./logger";
 import execa = require("execa");
+import glob = require("glob");
 
 const diffParser = require("./js/diff-parser/diff-parser.js").DiffParser;
 
@@ -66,13 +67,17 @@ async function getBaseCommit(repoPath: string, speculativeBranchesInOrder: strin
 /**
  * Finds speculative branch based on the current branch name. If current branch is not on the list at all, select first. If it is, take the next one. If it's the last one just return undefined.
  */
-function findSpeculativeBaseBranch(
+export function findSpeculativeBaseBranch(
   currentBranchName: string,
   speculativeBranchesInOrder: string[],
 ): string | undefined {
-  const currentBranchInOrder = speculativeBranchesInOrder.indexOf(currentBranchName);
+  const match = speculativeBranchesInOrder.find(pattern => {
+    const regex = new glob.Glob(pattern).minimatch.makeRe();
 
-  return speculativeBranchesInOrder[currentBranchInOrder + 1];
+    return regex.test(currentBranchName);
+  });
+
+  return match !== undefined ? currentBranchName : speculativeBranchesInOrder[0];
 }
 
 async function getFileStatuses(repo: string, baseCommit: string, headCommit: string): Promise<FileStatuses> {
