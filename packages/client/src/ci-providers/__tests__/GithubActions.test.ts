@@ -40,7 +40,7 @@ describe("Github Actions", () => {
 
       expect(provider.isCurrentlyRunning()).toBe(true);
       expect(provider.isFork()).toBe(true);
-      expect(provider.getProjectSlug()).toBe("krzkaczor/actions-tests");
+      expect(provider.getProjectSlug()).toBe("test12345678t/actions-tests");
       expect(provider.getPullRequestID()).toBe(3);
       expect(provider.getCurrentSha()).toBe("6a0c7cd10b59d2520ea8a5f4860aa98f167cb27a");
     });

@@ -39,6 +39,10 @@ export class GithubActions implements CiProvider {
   public getProjectSlug(): string {
     const event = this.getEvent();
 
+    if (this.isFork()) {
+      return get(event, "pull_request.base.repo.full_name");
+    }
+
     return get(event, "pull_request.head.repo.full_name") || get(event, "repository.full_name");
   }
 
