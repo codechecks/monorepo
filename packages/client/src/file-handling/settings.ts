@@ -3,7 +3,6 @@ import { join, extname } from "path";
 import { existsSync } from "fs";
 import { loadJson } from "../file-executors/executeJson";
 import { loadYaml } from "../file-executors/executeYaml";
-import { DeepPartial } from "ts-essentials";
 import { crash } from "../utils/errors";
 
 const CODECHECKS_SETTINGS_FILES_NAMES = ["codechecks.yml", "codechecks.yaml", "codechecks.json"];
@@ -37,7 +36,7 @@ function loadSettingsFromFile(filePath: string): CodeChecksSettings | undefined 
   }
 }
 
-function normalizeSettings(userProvidedSettings: DeepPartial<CodeChecksSettings> = {}): CodeChecksSettings {
+function normalizeSettings(userProvidedSettings: Partial<CodeChecksSettings> = {}): CodeChecksSettings {
   return {
     speculativeBranchSelection: userProvidedSettings.speculativeBranchSelection === false ? false : true,
     branches: userProvidedSettings.branches || ["master"],

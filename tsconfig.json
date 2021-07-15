@@ -16,7 +16,7 @@
     "lib": ["es2015", "esnext.asynciterable", "dom"],
     "sourceMap": true,
     "declaration": true,
-    "outDir": "dist/client",
+    "outDir": "./dist",
     "baseUrl": "packages",
     "paths": {
       "codechecks": ["client/src"]
