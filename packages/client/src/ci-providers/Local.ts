@@ -59,8 +59,7 @@ export class LocalProvider implements CiProvider {
         sha: await this.getCurrentSha(),
       },
       base: {
-        // @todo we should have heuristics to detect "main" branch, sometimes it's dev
-        sha: await this.getShaForRef("master"),
+        sha: await this.getShaForRef((await execa.shell(`git symbolic-ref --short HEAD`)).stdout.trim()), 
       },
     };
   }
