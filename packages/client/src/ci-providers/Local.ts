@@ -59,7 +59,7 @@ export class LocalProvider implements CiProvider {
         sha: await this.getCurrentSha(),
       },
       base: {
-        sha: await this.getShaForRef((await execa.shell(`git symbolic-ref --short HEAD`)).stdout.trim()), 
+        sha: await this.getShaForRef((await execa.shell(`git symbolic-ref --short HEAD`)).stdout.trim()),
       },
     };
   }
