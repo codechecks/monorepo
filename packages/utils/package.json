@@ -1,0 +1,46 @@
+{
+  "name": "@codechecks/utils",
+  "description": "Utils to simplify codechecks plugins development",
+  "keywords": [
+    "codechecks",
+    "utils"
+  ],
+  "repository": "codechecks/monorepo",
+  "author": "Chris Kaczor <chris@kaczor.io>",
+  "version": "0.1.2",
+  "main": "dist/index.js",
+  "bin": {
+    "codechecks": "dist/runner.js"
+  },
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf ./dist && cp -R '../../dist/utils/src/' ./dist/",
+    "prepublishOnly": "cd ../../ && yarn build"
+  },
+  "dependencies": {
+    "@types/debug": "^4.1.5",
+    "debug": "^4.1.1",
+    "execa": "^2.0.4",
+    "lodash": "^4.17.15",
+    "promise": "^8.0.2",
+    "promise-all": "^1.0.0",
+    "tmp-promise": "^2.0.2",
+    "ts-essentials": "^3.0.2",
+    "ts-node": "^8.0.2",
+    "url-join": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.138",
+    "@types/tmp": "^0.1.0"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=6"
+  }
+}

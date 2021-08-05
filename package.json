@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "prepare": "patch-package",
-    "build": "rm -rf ./dist && tsc -p ./tsconfig.prod.json && (cd packages/client/ && yarn build)",
+    "build": "rm -rf ./dist && tsc -p ./tsconfig.prod.json && (cd packages/client/ && yarn build) && (cd packages/utils/ && yarn build)",
     "tsc": "tsc -p . --noEmit && tsc -p ./tsconfig.prod.json --noEmit",
     "tslint": "tslint -p ./tsconfig.json -e 'node_modules/**/*' -e '**/node_modules/**/*' 'packages/**/*.ts'",
     "tslint:fix": "tslint --fix --format stylish -p ./tsconfig.json -e 'node_modules/**/*' -e '**/node_modules/**/*' 'packages/**/*.ts'",
@@ -30,7 +30,7 @@
     "ts-node": "^7.0.1",
     "tsconfig-paths": "^3.7.0",
     "tslint": "^5.11.0",
-    "typescript": "^3.1.6",
+    "typescript": "^3.6.3",
     "typestrict": "^1.0.1",
     "wsrun": "^5.0.0"
   },

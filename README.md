@@ -50,6 +50,7 @@ Particular codechecks can be distributed as **npm** packages and can be setup in
 | Package                                  | Version                                                                                                         | Description                                                |
 | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
 | [`@codechecks/client`](/packages/client) | [![npm](https://img.shields.io/npm/v/@codechecks/client.svg)](https://www.npmjs.com/package/@codechecks/client) | TypeScript/JavaScript client used for executing codechecks |
+| [`@codechecks/client`](/packages/utils)  | [![npm](https://img.shields.io/npm/v/@codechecks/utils.svg)](https://www.npmjs.com/package/@codechecks/utils)   | Utils to simplify codechecks plugins development           |
 
 Note: Currently we are in the process of open sourcing whole platform.
 
