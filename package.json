@@ -39,5 +39,18 @@
   ],
   "dependencies": {
     "typecov": "^0.2.1"
-  }
+  },
+  "description": "<p align=\"center\">\r   <a href=\"https://codechecks.io\"><img src=\"./images/codechecks.png\" width=\"600\" alt=\"codechecks.io\"></a>\r   <h1 align=\"center\">Code Checks</h1>\r   <p align=\"center\">\r   Open source platform for code review automation ✅\r   </p>\r   <p align=\"center\">\r     <a href=\"https://circleci.com/gh/codechecks/monorepo\"><img alt=\"Build Status\" src=\"https://circleci.com/gh/codechecks/monorepo/tree/master.svg?style=svg\"></a>\r     <a href=\"/package.json\"><img alt=\"Software License\" src=\"https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square\"></a>\r     <img src=\"https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square\" alt=\"All Contributors\">\r     <a href=\"https://codechecks.io\"><img src=\"https://raw.githubusercontent.com/codechecks/docs/master/images/badges/badge-default.svg?sanitize=true\" alt=\"codechecks.io\"></a>\r   </p>\r </p>",
+  "main": "jest.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dariusmark-tech/monorepo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dariusmark-tech/monorepo/issues"
+  },
+  "homepage": "https://github.com/dariusmark-tech/monorepo#readme"
 }
