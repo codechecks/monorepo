@@ -5,3 +5,6 @@ checks:
     options:
       - name: node-gyp
         reason: "No native modules, please! They make installation for users much harder"
+
+  - name: build-size-check        
+    preset: ./checks/codechecks.ts  
